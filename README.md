@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # afterclass
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -71,3 +72,6 @@ npm run test:e2e -- --debug
 ```sh
 npm run lint
 ```
+=======
+# cw-frontend
+>>>>>>> 7d31ea4497ca33be8dfba2f54e00e136c3073e8d
