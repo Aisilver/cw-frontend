@@ -1,0 +1,11 @@
+import { defineComponent, ref } from "vue";
+
+export default defineComponent({
+    setup() {
+        const Message = ref("Welcome To Auth")
+
+        return {
+            Message
+        }
+    }
+})

@@ -1,0 +1,4 @@
+@mixin BoxContainer ($size) {
+    width: $size;
+    height: $size;
+}
