@@ -6,7 +6,9 @@ export default defineComponent({
     const MainModalDOMELement = ref<HTMLElement | null>(null)
 
     onMounted(() => {
-        _ModalService.Initialize(MainModalDOMELement.value)
+      const modalService = _ModalService()
+
+      modalService.state.Initialize(MainModalDOMELement.value)
     })
 
     return { MainModalDOMELement }

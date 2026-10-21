@@ -3,4 +3,5 @@
 
 <template>
   <h1>{{ Message }}</h1>
+  <button @click="openDialogue()">Click Me</button>
 </template>

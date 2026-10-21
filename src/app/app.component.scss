@@ -1,10 +1,13 @@
 @use "/src/assets/styles/variables" as *;
+@use "sass:color";
 
 .modal-container {
     position: fixed;
+    display: grid;
+    place-items: center;
     width: 100vw;
     height: 100vh;
-    background-color: transparentize($color: $black, $amount: .8);
+    background-color: color.adjust($black, $alpha: -.8);
     backdrop-filter: blur($smallSize);
     z-index: 100;
 }

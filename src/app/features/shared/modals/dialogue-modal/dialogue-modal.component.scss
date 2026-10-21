@@ -1,0 +1,5 @@
+@use "/src/assets/styles/mixings" as *;
+
+main {
+    @include CenteredModalBasicStyles(medium);
+}
