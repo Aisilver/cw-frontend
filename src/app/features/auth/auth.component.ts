@@ -1,5 +1,6 @@
 import { defineComponent, ref } from "vue";
 import { _GCModalService } from "../shared/modals/g-centered-modal.service";
+import { InjectService } from "@/app/functions/inject-service.func";
 
 export default defineComponent({
     setup() {
@@ -12,7 +13,7 @@ export default defineComponent({
 
     methods: {
         openDialogue() {
-            const GCModal = _GCModalService().state
+            const GCModal = InjectService(_GCModalService)
 
             GCModal.openDialogue()
         }

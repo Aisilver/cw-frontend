@@ -1,16 +1,12 @@
 import { _ModalService } from '@/app/main-services/modal-service/modal.service'
-import { defineStore } from 'pinia'
-import { reactive } from 'vue'
 import DialogueComponent from "./dialogue-modal/dialogue-modal.component.vue"
+import { InjectService } from '@/app/functions/inject-service.func.ts'
+import { DefineService } from '@/app/functions/define-service.func.ts'
 
 class GCModalService {
-    private modal = _ModalService().state
+    private modalService = InjectService(_ModalService)
 
-    openDialogue = () => this.modal.Open(DialogueComponent, {})
+    openDialogue = () => this.modalService.Open(DialogueComponent, {})
 }
 
-export const _GCModalService = defineStore('gcmodal-service', () => {
-    const state = reactive(new GCModalService())
-
-    return { state }
-})
+export const _GCModalService = DefineService('gcmodal-service', new GCModalService())

@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "prebuild-dev": "powershell -ExecutionPolicy Bypass -File ./scripts/fetch-types.ps1",
+    "dev": "npm run prebuild-dev && vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",

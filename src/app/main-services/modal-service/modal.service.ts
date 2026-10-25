@@ -1,7 +1,7 @@
-import { createVNode, markRaw, reactive, render, type Component } from 'vue'
+import { createVNode, render, type Component } from 'vue'
 import gsap from 'gsap'
-import { defineStore } from 'pinia'
 import { BehaviorSubject } from 'rxjs'
+import { DefineService } from '@/app/functions/define-service.func'
 
 type ModalStateTypes = 'close' | "pending" | "open"
 
@@ -42,6 +42,7 @@ class ModalService {
     gsap.set(this.modalDom, this.modalPreState)
 
     this.Initialized = true 
+
   }
 
   Open(component: Component, inputs: any, onClose?: (param?: any) => void) {
@@ -93,9 +94,4 @@ class ModalService {
   }
 }
 
-export const _ModalService = defineStore("modal-service", () => {
-  
-  const state = reactive(new ModalService())
-
-  return { state }
-})
+export const _ModalService = DefineService("modal-service", new ModalService())
