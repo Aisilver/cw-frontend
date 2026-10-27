@@ -1,4 +1,4 @@
 export type ClientPublicKeyRegistrationRequest = {
-    publikcKey: string,
+    publicKey: string,
     clientId: string
 }

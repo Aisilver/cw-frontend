@@ -14,6 +14,7 @@ app.use(router);
     for (const initializer of Initializers) {
         await initializer()
     }
+
+    app.mount('#app')
 })();
 
-app.mount('#app')
