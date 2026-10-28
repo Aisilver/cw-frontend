@@ -31,6 +31,8 @@ class ServerCallService {
             doNotIncludeAccessToken
         } = opt
 
+        headers.append("Content-type", "application/json; charset=utf-8")
+
         if(!doNotIncludeAccessToken) {
             const {AccessToken} = InjectService(_UserService)
         
@@ -49,19 +51,20 @@ class ServerCallService {
         }
     }
 
-    private generateHttpObservable <Data> (url: string, method: keyof CallMethods, headers: Headers, data?: any) {        
+    private generateHttpObservable <Data = undefined> (url: string, method: keyof CallMethods, headers: Headers, data?: any) {        
         return new Observable<ApiResponse<Data>>(obvs => {
             fetch(url, {
                 headers,
                 method,
-                
                 ...(data && {
-                    body: data
+                    body: JSON.stringify(data)
                 })
             })
 
             .then(async response => {
-                obvs.next(await this.serializeResponse(response))
+                const serializedResponse = await this.serializeResponse(response)
+
+                obvs.next(serializedResponse)
 
                 obvs.complete()
             })
@@ -73,10 +76,8 @@ class ServerCallService {
             const errData: ApiResponse<any> = {
                 state: "failed",
                 message: err.message,
-                code: "ACCESS_TOKEN_EXPIRED",
-                data: null
-            } 
-
+            }
+            
             return of(errData)
         }))
     }
@@ -112,20 +113,22 @@ class ServerCallService {
 
         { headers } = response
 
-        let serializedData: ApiResponse<any> = await response.json()
+        let serializedData: ApiResponse<any>
 
         try {
+
             if(headers.get("x-encrypted-data")) 
-                //@ts-ignore
-                serializedData = JSON.parse(await serverResponseDecryptor.decrypt(serializedData))
-        } catch {
-            //@ts-ignore
+                serializedData = JSON.parse(await serverResponseDecryptor.decrypt(await response.json()))
+            else 
+                serializedData = await response.json()
+
+
+        } catch (error: any) {
             serializedData = {
                 state: "failed",
-                code: "API_RESPONSE_DECRYPTION_FAILED"
+                message: error.message
             }
         }
-
         return serializedData
     }
 }

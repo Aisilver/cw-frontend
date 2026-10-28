@@ -2,16 +2,22 @@ import { DefineService } from '../functions/define-service.func'
 import type { EncryptedResponse } from './types'
 
 class ServerResponseDecryptionService {
-  declare PRIVATE_B64_KEY: string
+  private declare PRIVATE_B64_KEY: string
 
-  declare PUBLIC_B64_KEY: string
+  private declare PUBLIC_B64_KEY: string
+
+  get ClientPublicEncryptionKey () {
+    if(!this.PUBLIC_B64_KEY) throw Error("Keys have not been generated yet")
+
+    return this.PUBLIC_B64_KEY
+  }
 
   private toB64 = (arrBuffer: ArrayBuffer) =>
     btoa(String.fromCharCode(...new Uint8Array(arrBuffer)))
 
   private fromB64 = (s: string) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0))
 
-  async Initialize() {
+  async generateAndSetEncryptionKeys () {
     const { privateKey, publicKey } = await crypto.subtle.generateKey(
         {
           name: 'RSA-OAEP',
