@@ -1,4 +1,3 @@
-import { catchError, from, Observable, of, retry, type Head } from "rxjs";
 import { DefineService } from "../functions/define-service.func";
 import { _UserService } from "../main-services/user-service/user.service";
 import { InjectService } from "../functions/inject-service.func";
@@ -7,15 +6,14 @@ import { _ServerResponseDecryptionService } from "./response-decryptor.service";
 import type { ServerCallBehavior } from "./types";
 
 type CallMethods <Data = unknown> = {
-    get(): Observable<ApiResponse<Data>>;
+    get(): Promise<ApiResponse<Data>>;
 
-    post(body: object): Observable<ApiResponse<Data>>;
+    post(body: object): Promise<ApiResponse<Data>>;
 
-    put(body: object): Observable<ApiResponse<Data>>;
+    put(body: object): Promise<ApiResponse<Data>>;
 
-    delete(): Observable<ApiResponse<Data>>
+    delete(): Promise<ApiResponse<Data>>
 }
-
 
 class ServerCallService {
     private get Enviroment () {
@@ -52,7 +50,7 @@ class ServerCallService {
     }
 
     private generateHttpObservable <Data = undefined> (url: string, method: keyof CallMethods, headers: Headers, data?: any) {        
-        return new Observable<ApiResponse<Data>>(obvs => {
+        return new Promise<ApiResponse<Data>>((res, rej) => {
             fetch(url, {
                 headers,
                 method,
@@ -64,22 +62,11 @@ class ServerCallService {
             .then(async response => {
                 const serializedResponse = await this.serializeResponse(response)
 
-                obvs.next(serializedResponse)
-
-                obvs.complete()
+                res(serializedResponse)
             })
 
-            .catch(err => obvs.error(err))
+            .catch(err => rej(err))
         })
-
-        .pipe(catchError(err => {
-            const errData: ApiResponse<any> = {
-                state: "failed",
-                message: err.message,
-            }
-            
-            return of(errData)
-        }))
     }
 
     private urlFormatter (params?: (string | number)[] | string, queries = {}): string {

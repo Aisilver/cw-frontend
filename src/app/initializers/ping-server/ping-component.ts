@@ -2,7 +2,7 @@ import { APP_IMAGE_PATHs_CONFIGURATIONS } from "@/app/configurations/image-paths
 import gsap from "gsap";
 
 export class PingComponent {
-    readonly TotalRetries = 3
+    readonly TotalRetries = 2
 
     readonly TryDuration = 2;
 
