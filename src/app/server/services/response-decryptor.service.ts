@@ -1,5 +1,6 @@
-import { DefineService } from '../functions/define-service.func'
-import type { EncryptedResponse } from './types'
+import { DefineService } from "@/app/functions/define-service.func"
+import type { EncryptedResponse } from "../types"
+
 
 class ServerResponseDecryptionService {
   private declare PRIVATE_B64_KEY: string

@@ -1,7 +1,7 @@
 import { createVNode, render, type Component } from 'vue'
-import gsap from 'gsap'
-import { BehaviorSubject } from 'rxjs'
 import { DefineService } from '@/app/functions/define-service.func'
+import { Animator } from '@/app/functions/animator.func'
+import { BehaviouralSubject } from '@/app/classes/subject-event/behavioural-subject-event.class'
 
 type ModalStateTypes = 'close' | "pending" | "open"
 
@@ -12,20 +12,22 @@ class ModalService {
 
   private Initialized = false
 
-  private modalStateEvent = new BehaviorSubject<ModalStateTypes>('close')
+  private modalStateEvent = new BehaviouralSubject<ModalStateTypes>("close")
 
   private animationDuration = 0.5
 
   private savedModals: ModalParam[] = []
 
-  private modalPreState: gsap.TweenVars = {
+  private animator = new Animator()
+
+  private modalPreState: Partial<CSSStyleDeclaration> = {
     pointerEvents: "none",
-    opacity: 0
+    opacity: "0"
   }
 
-  private modalPostState: gsap.TweenVars = {
+  private modalPostState: Partial<CSSStyleDeclaration> = {
     pointerEvents: "all",
-    opacity: 1
+    opacity: "0"
   }
 
   constructor () {
@@ -39,7 +41,7 @@ class ModalService {
 
     this.modalDom = modalDom
 
-    gsap.set(this.modalDom, this.modalPreState)
+    this.animator.set(this.modalDom, this.modalPreState)
 
     this.Initialized = true 
 
@@ -60,7 +62,7 @@ class ModalService {
       ...inputs,
 
       async onClose(param?: any) {
-        ev.next('close')
+        ev.emit('close')
 
         render(null, modalDom)
 
@@ -70,7 +72,7 @@ class ModalService {
 
     render(vnode, this.modalDom)
 
-    ev.next("open")
+    ev.emit("open")
   }
 
   private openNextModal () {
@@ -85,9 +87,9 @@ class ModalService {
 
   private animationHandler (state: ModalStateTypes) {
     if(state == 'open') {
-      gsap.to(this.modalDom, {...this.modalPostState, duration: this.animationDuration})
+      this.animator.to(this.modalDom, {...this.modalPostState, duration: this.animationDuration})
     } else {
-      gsap.from(this.modalDom, {...this.modalPostState, duration:this.animationDuration})
+      this.animator.from(this.modalDom, {...this.modalPostState, duration:this.animationDuration})
 
       .then(() => this.openNextModal())
     }

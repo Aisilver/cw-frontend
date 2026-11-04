@@ -1,10 +1,9 @@
 import { APP_IMAGE_PATHs_CONFIGURATIONS } from "@/app/configurations/image-paths.config";
-import gsap from "gsap";
 
 export class PingComponent {
     readonly TotalRetries = 2
 
-    readonly TryDuration = 2;
+    readonly TryDurationinMS = 15_0000; //15s
 
     private tries = 1
 
@@ -36,8 +35,6 @@ export class PingComponent {
 
     private compClassName = "ping-component"
 
-    private lineAnimationTimeLine = gsap.timeline({paused: true, repeat: this.TotalRetries - 1})
-
     constructor() {
         this.componentBody = document.createElement("section")
 
@@ -58,10 +55,6 @@ export class PingComponent {
 
         //@ts-ignore
         this.TextElement = this.componentBody.querySelector(".text")
-
-        this.lineAnimationTimeLine.to(this.lineElement, {width: "70%", duration: this.TryDuration})
-
-        this.lineAnimationTimeLine.play()
     }
 
     Retrying () {
@@ -84,8 +77,6 @@ export class PingComponent {
 
     Failed () {
         const {CONNECTION_LOST} = APP_IMAGE_PATHs_CONFIGURATIONS
-
-        this.lineAnimationTimeLine.revert()
 
         this.lineElement.remove()
 
