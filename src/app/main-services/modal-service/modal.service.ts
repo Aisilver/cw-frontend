@@ -1,6 +1,6 @@
 import { createVNode, render, type Component } from 'vue'
 import { DefineService } from '@/app/functions/define-service.func'
-import { Animator } from '@/app/functions/animator.func'
+import { Animator } from '@/app/classes/animator/animator.class'
 import { BehaviouralSubject } from '@/app/classes/subject-event/behavioural-subject-event.class'
 
 type ModalStateTypes = 'close' | "pending" | "open"
@@ -27,7 +27,7 @@ class ModalService {
 
   private modalPostState: Partial<CSSStyleDeclaration> = {
     pointerEvents: "all",
-    opacity: "0"
+    opacity: "1"
   }
 
   constructor () {

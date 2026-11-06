@@ -1,0 +1,12 @@
+@use "./variables" as *;
+@use "./functions" as *;
+@use "sass:color";
+
+@mixin Pattern1 ($intensity: -0.8) {
+  $patternColor: custom_transparentize($primary, $intensity);
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(0deg, transparent 24%, $patternColor 25%, $patternColor 26%, transparent 27%,transparent 74%, $patternColor 75%, $patternColor 76%, transparent 77%,transparent),
+      linear-gradient(90deg, transparent 24%, $patternColor 25%, $patternColor 26%, transparent 27%,transparent 74%, $patternColor 75%, $patternColor 76%, transparent 77%,transparent);
+  background-size: 55px 55px;
+}

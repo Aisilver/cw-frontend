@@ -1,7 +1,7 @@
 import { InjectService } from '@/app/functions/inject-service.func'
 import { _UserService } from '@/app/main-services/user-service/user.service'
-import { _ServerResponseDecryptionService } from '@/app/server/response-decryptor.service'
 import { _AppRouteCallService } from '@/app/server/routes/app-route-call/app-route-call.service'
+import { _ServerResponseDecryptionService } from '@/app/server/services/response-decryptor.service'
 import { _ServerCallService } from '@/app/server/services/server-call.sevice'
 
 export async function INIT_registerClientPublicKey() {

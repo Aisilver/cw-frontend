@@ -1,0 +1,24 @@
+@use "/src/partial-styles/variables" as *;
+@use "/src/partial-styles/mixings" as *;
+@use "/src/partial-styles/functions" as *;
+
+main [nav-component] {
+    position: fixed;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    padding: $mediumSize 0;
+    z-index: 5;
+
+    section {
+        @include ContentContainer;
+        @include WhiteContainer(transparent, false);
+        display: flex;
+    }
+
+    &:not(.logo-only) {
+        section {
+            @include WhiteContainer;
+        }
+    }   
+}

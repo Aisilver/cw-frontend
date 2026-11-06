@@ -1,0 +1,5 @@
+@use "sass:color";
+
+@function custom_transparentize ($color, $opacity: -0.5) {
+    @return color.adjust($color, $alpha: $opacity)
+}

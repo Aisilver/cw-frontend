@@ -1,5 +1,9 @@
 @use "/src/partial-styles/variables" as *;
+@use "/src/partial-styles/mixings" as *;
+@use "/src/partial-styles/functions" as *;
 @use "sass:color";
+
+$linear_gradient_opacity: -0.2;
 
 .modal-container {
     position: fixed;
@@ -7,13 +11,14 @@
     place-items: center;
     width: 100vw;
     height: 100vh;
-    background-color: color.adjust($black, $alpha: -.8);
+    background-color: custom_transparentize($black, -0.8);
     backdrop-filter: blur($smallSize);
     z-index: 100;
 }
 
 main {
+    @include PageContainer;
+    background: linear-gradient( 45deg, custom_transparentize($pallet_pink, $linear_gradient_opacity), custom_transparentize($pallet_purple, $linear_gradient_opacity));
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    overflow-x: hidden;
 }

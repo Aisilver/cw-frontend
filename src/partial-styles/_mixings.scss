@@ -1,9 +1,36 @@
-@use "./variables" as *;
 @use "sass:color";
+@use "./variables" as *;
+@use "./functions" as *;
 
 @mixin BoxContainer ($size) {
     width: $size;
     height: $size;
+}
+
+@mixin PageContainer () {
+    width: 100vw;
+    height: 100vh;
+}
+
+@mixin ContentContainer {
+    @media (min-width: 1400px) {
+        width: clamp(300px, 80%, 2000px);
+    }
+
+    @media (max-width: 1400px) {
+        width: clamp(300px, 80%, 1200px);
+    }
+}
+
+@mixin WhiteContainer ($bgColor: $white, $shadow: true, $padding: $mediumSize) {
+    border-radius: $smallSize;
+    background-color: $bgColor;
+    height: max-content;
+    padding: $padding;
+
+    @if $shadow == true {
+        box-shadow: 5px 5px 10px custom_transparentize($black, -0.8);
+    }
 }
 
 @mixin CenteredModalBasicStyles ($size: small) {

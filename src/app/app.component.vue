@@ -2,7 +2,7 @@
 
 <template>
   <div class="modal-container" ref="MainModalDOMELement"></div>
-  <main>
+  <main app-component>
     <RouterView />
   </main>
 </template>

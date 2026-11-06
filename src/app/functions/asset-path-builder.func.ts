@@ -1,5 +1,14 @@
-export function AssetsPathBuilder (assetType: "image", name: string, ext: "svg") {
-    const folder = assetType == "image" ? "images" : "null"
+type Options = {
+    name: string;
+    ext: "svg" | "webp" | "png";
+    folder?: "image"
+}
 
-    return `/${folder}/${name}.${ext}`
+export function AssetsPathBuilder (opts: Options) {
+    const {name, ext, folder} = opts
+    
+    if(folder) 
+        return `/${folder}/${name}.${ext}`
+    else
+        return `/${name}.${ext}`
 }

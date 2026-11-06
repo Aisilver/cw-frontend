@@ -4,10 +4,9 @@ export type Vars = {
 
 export class Animator {
 
-    private getTransitionValue = (duration = .5) => `${duration ?? .5}s`
+    private getTransitionValue = (duration = .5) => `${duration}s`
 
     private delay = (duration: number = .5) => new Promise<void>((res) =>  setTimeout(() => res(), duration * 1000))
-
 
     set(target: HTMLElement, vars: Partial<CSSStyleDeclaration>) {
         Object.assign(target.style, vars)
@@ -24,11 +23,12 @@ export class Animator {
     }
 
     async from(target: HTMLElement, vars: Vars) {
-        const { duration = 0.5, ...fromStyles } = vars
+        let targetOrgStyleValues: Partial<CSSStyleDeclaration> = {}
 
-        const original = {
-            opacity: target.style.opacity,
-            transform: target.style.transform
+        const { duration , ...fromStyles } = vars
+
+        for (const styles in fromStyles) {
+            targetOrgStyleValues[styles] = target.style[styles]
         }
 
         target.style.transition = 'none'
@@ -38,7 +38,8 @@ export class Animator {
         target.getBoundingClientRect()
 
         target.style.transition = this.getTransitionValue(duration)
-        Object.assign(target.style, original)
+        
+        Object.assign(target.style, targetOrgStyleValues)
 
         await this.delay(duration)
     }

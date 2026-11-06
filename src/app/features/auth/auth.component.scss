@@ -1,0 +1,7 @@
+@use "/src/partial-styles/mixings" as *;
+@use "/src/partial-styles/patterns" as *;
+
+main[auth-component] {
+    @include PageContainer;
+    @include Pattern1(-.9);
+}
