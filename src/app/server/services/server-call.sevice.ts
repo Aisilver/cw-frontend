@@ -38,17 +38,17 @@ class ServerCallService {
     }
 
     return {
-      get: () => this.generateHttpObservable(url, 'get', headers),
+      get: () => this.generateHttpPromise(url, 'get', headers),
 
-      post: (body: object) => this.generateHttpObservable(url, 'post', headers, body),
+      post: (body: object) => this.generateHttpPromise(url, 'post', headers, body),
 
-      put: (body: object) => this.generateHttpObservable(url, 'put', headers, body),
+      put: (body: object) => this.generateHttpPromise(url, 'put', headers, body),
 
-      delete: () => this.generateHttpObservable(url, 'delete', headers),
+      delete: () => this.generateHttpPromise(url, 'delete', headers),
     }
   }
 
-  private generateHttpObservable<Data = undefined>(
+  private generateHttpPromise<Data = undefined>(
     url: string,
     method: keyof CallMethods,
     headers: Headers,

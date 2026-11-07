@@ -3,6 +3,10 @@
 
 <template>
     <main image-component>
-        <img ref="ImgElement">
+        <loader-component ref="loader" type="fade-loader">
+            <template #content>
+                <img ref="ImgElement">
+            </template>
+        </loader-component>
     </main>
 </template>

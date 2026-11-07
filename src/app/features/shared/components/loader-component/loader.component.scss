@@ -1,0 +1,14 @@
+main[loader-component] {
+    flex: 1;
+    display: flex;
+    position: relative;
+
+    ui_float {
+        display: flex;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: inherit;
+    }
+}

@@ -14,5 +14,5 @@ export default defineComponent({
         title = ref("afterclass")
 
         return { logoUrl, title }
-    }
+    } 
 })
