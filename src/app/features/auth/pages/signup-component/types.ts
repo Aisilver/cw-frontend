@@ -1,0 +1,1 @@
+export type SignUpStagesTypes = "bio" | "auth" | "done"

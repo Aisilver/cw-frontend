@@ -2,9 +2,14 @@
 @use "./variables" as *;
 @use "./functions" as *;
 
-@mixin BoxContainer ($size) {
-    width: $size;
-    height: $size;
+@mixin BoxContainer ($size: null, $width: null, $height: null) {
+    @if $size != null {
+        width: $size;
+        height: $size;
+    } @else {
+        width: $width;
+        height: $height;
+    }
 }
 
 @mixin PageContainer () {
@@ -23,7 +28,7 @@
 }
 
 @mixin WhiteContainer ($bgColor: $white, $shadow: true, $padding: $mediumSize) {
-    border-radius: $smallSize;
+    border-radius: $mediumSize;
     background-color: $bgColor;
     height: max-content;
     padding: $padding;

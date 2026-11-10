@@ -1,3 +1,16 @@
+@font-face {
+    font-family: PlusJakartaSans;
+    src: url("/font/PlusJakartaSans-VariableFont_wght.ttf") format("woff2-variations"),
+    url("/font/PlusJakartaSans-VariableFont_wght.ttf") format("woff2-variations");
+    font-weight: 100 900;
+    font-stretch: 75% 125%;
+    font-style: normal;
+}
+
+// FONTS 
+
+$primary_font: PlusJakartaSans;
+
 // SIZE NUMERICALS
 
 $smallSize: 5px;
@@ -17,3 +30,5 @@ $pallet_purple: #a079ff;
 $black: #000;
 
 $white: #FFF;
+
+$grey: #d9d9d9;

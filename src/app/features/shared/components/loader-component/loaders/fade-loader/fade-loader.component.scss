@@ -1,3 +1,30 @@
+@use "/src/partial-styles/variables" as *;
+@use "/src/partial-styles/mixings" as *;
+@use "/src/partial-styles/functions" as *;
+
 main[fade-loader-component] {
-    background-color: red;
+    position: relative;
+    background-color: $grey;
+    overflow: hidden;
+
+    &::after {
+        @include BoxContainer(100%);
+        position: absolute;
+        content: '';
+        background-image: linear-gradient(to right, $grey 0%, custom_transparentize($black, -.5) 20%, $grey 50%, $grey 100%);
+        background-size: 450px 400px;
+        background-repeat: no-repeat;
+        animation: shimmer 1s linear infinite;
+
+
+        @keyframes shimmer {
+            0%{
+                background-position: -450px 0;
+            }
+
+            100%{
+                background-position: 450px 0;
+            }
+        }
+    }
 }

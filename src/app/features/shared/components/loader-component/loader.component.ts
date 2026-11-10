@@ -49,6 +49,8 @@ export default defineComponent({
 
             render(vnode, this.FloatDOMElement)
 
+            this.animator.set(this.FloatDOMElement, {pointerEvents: "all"})
+
             this.animator.set(vnode.el as HTMLElement, {flex: "1"})
         },
 
@@ -56,6 +58,8 @@ export default defineComponent({
             if(!this.FloatDOMElement) throw Error("failed to close: loader container cannot be found")
 
             render(null, this.FloatDOMElement)
+
+            this.animator.set(this.FloatDOMElement, {pointerEvents: "none"})
         },
 
         delay (timeDelay = 0) {
@@ -68,8 +72,8 @@ export default defineComponent({
             this.showLoader()
 
             targetValue = await target()
-            
-            this.closeLoader()
+
+            this.delay(1000).then(() => this.closeLoader())
 
             return targetValue
         }

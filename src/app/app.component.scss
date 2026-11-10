@@ -11,7 +11,7 @@ $linear_gradient_opacity: -0.2;
     place-items: center;
     width: 100vw;
     height: 100vh;
-    background-color: custom_transparentize($black, -0.8);
+    background-color: custom_transparentiz e($black, -0.8);
     backdrop-filter: blur($smallSize);
     z-index: 100;
 }
@@ -21,4 +21,8 @@ main {
     background: linear-gradient( 45deg, custom_transparentize($pallet_pink, $linear_gradient_opacity), custom_transparentize($pallet_purple, $linear_gradient_opacity));
     position: relative;
     overflow-x: hidden;
+
+    & > * {
+        font-family: $primary_font;
+    }
 }

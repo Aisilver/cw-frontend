@@ -1,7 +1,7 @@
 type Options = {
     name: string;
     ext: "svg" | "webp" | "png";
-    folder?: "image"
+    folder?: "images"
 }
 
 export function AssetsPathBuilder (opts: Options) {

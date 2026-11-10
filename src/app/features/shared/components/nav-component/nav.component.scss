@@ -3,7 +3,7 @@
 @use "/src/partial-styles/functions" as *;
 
 main [nav-component] {
-    position: fixed;
+    position: static;
     width: 100vw;
     display: flex;
     justify-content: center;

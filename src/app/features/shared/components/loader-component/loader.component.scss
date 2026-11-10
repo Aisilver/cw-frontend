@@ -2,7 +2,8 @@ main[loader-component] {
     flex: 1;
     display: flex;
     position: relative;
-
+    border-radius: inherit;
+    
     ui_float {
         display: flex;
         position: absolute;
@@ -10,5 +11,6 @@ main[loader-component] {
         height: 100%;
         overflow: hidden;
         border-radius: inherit;
+        z-index: 5
     }
 }

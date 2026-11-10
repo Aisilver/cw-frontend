@@ -1,0 +1,45 @@
+@use "/src/partial-styles/variables" as *;
+@use "/src/partial-styles/mixings" as *;
+
+main [sign-up-bio-component] {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: $mediumSize;
+    padding: $largeSize;
+    overflow-y: scroll;
+
+    h1 {
+        color: $pallet_purple
+    }
+
+    .role-img-wrapper {
+        @include BoxContainer(150px);
+        position: relative;
+        margin: $largeSize * 2 0;
+
+        .img-wrap {
+            @include BoxContainer(inherit);
+            position: absolute;
+            display: flex;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: .4s ease;
+
+            &.active {
+                opacity: 1;
+            }
+
+            & [image-component] {
+                flex: 1;
+            }
+        }
+
+
+        @media (min-width: 800px) {
+            @include BoxContainer(200px);
+        }
+    }
+}

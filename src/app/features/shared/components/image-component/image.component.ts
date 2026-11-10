@@ -37,18 +37,26 @@ export default defineComponent({
   mounted() {
     if (!this.ImgElement) return
 
-    this.animator.set(this.ImgElement, { objectFit: this.objectFit ?? 'cover' })
+    if(this.src) this.loadImage()
 
-    this.loadImage()
+    this.setImageFit(this.objectFit)
   },
 
   watch: {
     src() {
-        this.loadImage()
+      this.loadImage()
+    },
+
+    objectFit(value) {
+      this.setImageFit(value)
     }
   },
   
   methods: {
+    setImageFit (fit = "cover") {
+      if(this.ImgElement) this.animator.set(this.ImgElement, { objectFit: fit })
+    },
+
     getDefaultImage(imgKey: DefaultImageTypes = 'no-image') {
       const {USER_ICON, NO_IMAGE} = APP_IMAGE_PATHs_CONFIGURATIONS
 
@@ -74,6 +82,10 @@ export default defineComponent({
 
             this.ImgElement.src = url
         }))
+
+        .then(() => {
+          if(this.ImgElement) this.animator.from(this.ImgElement, {opacity: "0", duration: 3})
+        })
     }
   },
 })

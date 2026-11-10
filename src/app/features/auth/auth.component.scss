@@ -1,7 +1,27 @@
+@use "/src/partial-styles/variables" as *;
 @use "/src/partial-styles/mixings" as *;
 @use "/src/partial-styles/patterns" as *;
 
 main[auth-component] {
     @include PageContainer;
     @include Pattern1(-.9);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    .wrapper {
+        display: flex;
+        @include ContentContainer;
+        @include WhiteContainer($white, true, 0px);
+        height: 100%;
+        margin: $largeSize 0;
+
+        .route-wrapper, main[image-component] {
+            flex: 1;
+        }
+
+        .route-wrapper {
+            display: flex;
+        }
+    }
 }
