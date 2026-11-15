@@ -5,22 +5,23 @@
     <main sign-up-bio-component>
 
         <h1>SIGN UP</h1>
-
-        <section class="role-img-wrapper">
-
-            <div class="img-wrap" :class="Role == 'parent' ? 'active' : ''">
-                <imageComponent :objectFit="'contain'" :src="imageSrc.parent"/>
-            </div>
-            
-            <div class="img-wrap" :class="Role == 'student' ? 'active' : ''">
-                <imageComponent :objectFit="'contain'" :src="imageSrc.student"/>
-            </div>
-
-            <div class="img-wrap" :class="Role == 'teacher' ? 'active' : ''">
-                <imageComponent :objectFit="'contain'" :src="imageSrc.teacher"/>
-            </div>
-        </section>
         
-        <signUpRoleSelectComponent/>
+        <signUpRoleImageCarouselComponent :Role="Role"/>
+
+        <signUpRoleSelectComponent @onRoleChange="onRoleChange($event)"/>
+
+        <formComponent v-slot="{ formKey, valid }" @submit="Next()">
+
+            <inputComponent :formContextKey="formKey">
+                <input type="text" placeholder="First name" v-model="NewUser.firstName" required name="firstName"/>
+            </inputComponent>
+        
+            <inputComponent :formContextKey="formKey" >
+                <input type="text" placeholder="Last name" v-model="NewUser.lastName" name="lastName"/>
+            </inputComponent>
+        
+            <button v-if="valid">Hello</button>
+
+        </formComponent>
     </main>
 </template>

@@ -1,0 +1,13 @@
+@use "/src/partial-styles/variables" as *;
+
+main[form-component] {
+    display: flex;
+
+    form {
+        flex: 1;
+        display: flex;
+        flex-flow: column;
+        gap: $largeSize;
+        padding: $largeSize;
+    }
+}

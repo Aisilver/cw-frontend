@@ -1,0 +1,15 @@
+@use "./variables" as *;
+
+@mixin ShakeAnimation () {
+    animation: shake .1s linear 3;
+
+    @keyframes shake {
+        0%, 100% {
+            transform: translateX(0px);
+        }
+
+        50% {
+            transform: translateX($mediumSize);
+        }
+    }
+}

@@ -2,7 +2,7 @@ import { SubjectEvent } from "./subject-abs.class";
 import type { Subscription } from "./types";
 
 
-export class Subject<Data = unknown> extends SubjectEvent<Data> {
+export class Subject<Data = void> extends SubjectEvent<Data> {
     emit(data: Data) {
         this.event.dispatchEvent(new CustomEvent<Data>(this.eventKey, {detail: data}))
     }

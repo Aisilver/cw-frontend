@@ -1,49 +1,56 @@
 import { InjectService } from '@/app/functions/inject-service.func'
 import { defineComponent, ref } from 'vue'
 import { _SignupService } from '../../services/sign-up.service.ts'
-import type { Subscription } from '@/app/classes/subject-event/types.ts'
 import type { Roles } from '@shared/common/roles-type.js'
 import signUpRoleSelectComponent from './components/role-select/sign-up-role-select.component.vue'
-import imageComponent from '@/app/features/shared/components/image-component/image.component.vue'
-import { APP_IMAGE_PATHs_CONFIGURATIONS } from '@/app/configurations/image-paths.config.ts'
+import inputComponent from '@/app/features/shared/components/input-component/input.component.vue'
+import formComponent from '@/app/features/shared/components/form-component/form.component.vue'
+import signUpRoleImageCarouselComponent from './components/role-image-carousel/sign-up-role-image-carousel.component.vue'
 
 export default defineComponent({
   components: {
     signUpRoleSelectComponent,
-    imageComponent
+    signUpRoleImageCarouselComponent,
+    formComponent,
+    inputComponent
   },
 
   setup() {
-    const {SIGN_UP_PARENT_IMAGE, SIGN_UP_STUDENT_IMAGE, SIGN_UP_TEACHER_IMAGE} = APP_IMAGE_PATHs_CONFIGURATIONS,
-    
-    service = InjectService(_SignupService),
+    const service = InjectService(_SignupService),
 
-    imageSrc = ref({
-        parent: SIGN_UP_PARENT_IMAGE,
-    
-        student: SIGN_UP_STUDENT_IMAGE,
+    FormComponent = ref<InstanceType<typeof formComponent>>(),
 
-        teacher: SIGN_UP_TEACHER_IMAGE
-    }),
+    FirstNameModel = ref<InstanceType<typeof inputComponent>>(),
 
-    Role = ref(service.Role.getValue())
+    LastNameModel = ref<InstanceType<typeof inputComponent>>(),
 
-    let roleChangeSubs: Subscription | undefined
+    Role = ref<Roles>(service.Role.getValue()),
 
-    return { service, roleChangeSubs, imageSrc, Role }
+    NewUser = ref(service.getNewUserObject())
+
+    return { 
+      service, 
+      Role, 
+      NewUser, 
+      FormComponent,
+      FirstNameModel,
+      LastNameModel
+    }
+  },
+
+  updated() {
   },
 
   mounted() {
-    this.roleChangeSubs = this.service.Role.subscribe(role => this.onRoleChange(role))
   },
 
   methods: {
     onRoleChange(role: Roles) {
-        this.Role = role
-    }
-  },
+      this.Role = role
+    },
 
-  unmounted() {
-    this.roleChangeSubs?.unsubscribe()
+    Next () {
+
+    }
   }
 })

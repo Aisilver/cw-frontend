@@ -7,16 +7,22 @@ import { _SignupService } from '../../../../services/sign-up.service'
 export default defineComponent({
   setup() {
     const service = InjectService(_SignupService),
+      
       RoleValues = ref<Roles[]>(['parent', 'student', 'teacher'])
 
-    let Role = ref(service.Role.getValue()),
-      roleChangeSubs!: Subscription
+    let Role = ref<Roles>(),
+      
+      roleChangeSubs: Subscription | undefined
 
     return { service, RoleValues, Role, roleChangeSubs }
   },
 
   mounted() {
-    this.roleChangeSubs = this.service.Role.subscribe((role) => (this.Role = role))
+    this.roleChangeSubs = this.service.Role.subscribe((role) => {
+      this.Role = role
+
+      this.$emit("onRoleChange", this.Role)
+    })
   },
 
   methods: {
@@ -24,4 +30,8 @@ export default defineComponent({
       this.service.Role.emit(role)
     },
   },
+
+  unmounted() {
+    this.roleChangeSubs?.unsubscribe()
+  }
 })

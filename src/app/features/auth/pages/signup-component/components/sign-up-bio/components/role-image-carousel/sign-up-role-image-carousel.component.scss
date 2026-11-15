@@ -1,0 +1,31 @@
+@use "/src/partial-styles/variables" as *;
+@use "/src/partial-styles/mixings" as *;
+
+main [role-select-carousel] {
+    @include BoxContainer(100px);
+    position: relative;
+    margin: $largeSize auto;
+
+    .img-wrap {
+        @include BoxContainer(inherit);
+        position: absolute;
+        display: flex;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: .4s ease;
+
+        &.active {
+            opacity: 1;
+        }
+
+        & [image-component] {
+            flex: 1;
+        }
+    }
+
+    @media (min-height: 800px) {
+        @include BoxContainer(200px);
+        margin: ($largeSize * 2) 0px;
+    }
+}

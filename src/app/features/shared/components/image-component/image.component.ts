@@ -1,6 +1,6 @@
 import { Animator } from '@/app/classes/animator/animator.class'
 import { defineComponent, ref } from 'vue'
-import loaderComponent, { type default as LoaderComponentType } from '../loader-component/loader.component.vue'
+import loaderComponent from '../loader-component/loader.component.vue'
 import { APP_IMAGE_PATHs_CONFIGURATIONS } from '@/app/configurations/image-paths.config.ts'
 
 type DefaultImageTypes = 'no-user' | 'no-image'
@@ -29,7 +29,7 @@ export default defineComponent({
       
     animator = new Animator(),
 
-    loader = ref<InstanceType<typeof LoaderComponentType> | null>(null)
+    loader = ref<InstanceType<typeof loaderComponent> | null>(null)
 
     return { ImgElement, animator, loader }
   },
