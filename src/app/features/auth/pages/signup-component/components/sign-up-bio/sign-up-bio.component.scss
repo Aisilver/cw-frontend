@@ -1,19 +1,59 @@
-@use "/src/partial-styles/variables" as *;
+@use "/src/partial-styles/variables" as *; 
+@use "/src/partial-styles/mixings" as *;
 
 main [sign-up-bio-component] {
-    flex: 1;
     display: flex;
     flex-flow: column;
+    align-items: center;
     gap: $mediumSize;
     padding: $largeSize;
     overflow-y: scroll;
 
-    & > *:not([form-component]) {
-        align-self: center;
-    }
-
     h1 {
         color: $pallet_purple
+    }
+
+    [form-component] {
+        width: clamp(250px, 100%, 700px);
+    }
+
+    .radio-label {
+        display: flex;
+        flex-flow: column;
+        gap: $mediumSize;
+        font-size: $preferred_font_size;
+
+        & > div {
+            display: flex;
+            gap: $largeSize;
+
+            & > div {
+                display: flex;
+                gap: $mediumSize;
+            }
+        }
+    }
+
+    [type="submit"] {
+        width: clamp(200px, 80%, 500px);
+        min-height: 35px;
+        background-color: $primary;
+        border-radius: $mediumSize;
+        color: $white;
+        margin: 0 auto;
+        margin-top: $largeSize;
+
+        &.disabled {
+            @include Disabled;
+        }
+    }
+
+    @media (max-width: 500px) {
+        padding: $largeSize $mediumSize;
+
+        h1 {
+            font-size: $mediumSize * 2;
+        }
     }
 
     @media (min-width: 800px) {

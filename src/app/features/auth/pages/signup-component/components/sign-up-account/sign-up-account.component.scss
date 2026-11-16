@@ -1,0 +1,19 @@
+@use "/src/partial-styles/variables" as *; 
+@use "/src/partial-styles/mixings" as *;
+
+main [sign-up-account-component] {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: $largeSize;
+    padding: $largeSize;
+
+    h1 {
+        color: $pallet_purple
+    }
+
+    [image-component] {
+        @include BoxContainer(200px);
+        margin: $largeSize 0;
+    }
+}

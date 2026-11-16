@@ -14,14 +14,31 @@ main[auth-component] {
         @include ContentContainer;
         @include WhiteContainer($white, true, 0px);
         height: 100%;
-        margin: $largeSize 0;
+        margin: auto;
+        max-height: 1000px;
 
         .route-wrapper, main[image-component] {
             flex: 1;
         }
 
+        main[image-component] {
+            min-width: 500px;
+        }
+
         .route-wrapper {
             display: flex;
         }
+        
+        @media (max-width: 1200px) {
+            main[image-component] {
+                display: none;
+            }
+        }
+
+        @media (max-width: 500px) {
+            margin-top: 0px;
+            margin-bottom: $mediumSize;
+        }
+
     }
 }

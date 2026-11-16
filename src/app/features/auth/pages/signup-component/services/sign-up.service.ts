@@ -17,7 +17,7 @@ class SigunUpService {
 
     Role = new BehaviouralSubject<Roles>("student")
 
-    SignUpStage = new BehaviouralSubject<SignUpStagesTypes>("bio")
+    SignUpStage = new BehaviouralSubject<SignUpStagesTypes>("account-setup")
 
     setUser(user: User) {
         this.user = user
@@ -25,6 +25,14 @@ class SigunUpService {
 
     setAccount(acct: Account) {
         this.account = acct
+    }
+
+    toAccountSetup () {
+        this.SignUpStage.emit("account-setup")
+    }
+
+    toFinished () {
+        this.SignUpStage.emit("finished")
     }
 }
 

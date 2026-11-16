@@ -6,13 +6,17 @@ import signUpRoleSelectComponent from './components/role-select/sign-up-role-sel
 import inputComponent from '@/app/features/shared/components/input-component/input.component.vue'
 import formComponent from '@/app/features/shared/components/form-component/form.component.vue'
 import signUpRoleImageCarouselComponent from './components/role-image-carousel/sign-up-role-image-carousel.component.vue'
+import FormErrMessageComponent from '@/app/features/shared/components/form-err-message/form-err-message.component.vue'
+import radioComponent from '@/app/features/shared/components/radio-component/radio.component.vue'
 
 export default defineComponent({
   components: {
     signUpRoleSelectComponent,
     signUpRoleImageCarouselComponent,
     formComponent,
-    inputComponent
+    FormErrMessageComponent,
+    inputComponent,
+    radioComponent
   },
 
   setup() {
@@ -38,19 +42,15 @@ export default defineComponent({
     }
   },
 
-  updated() {
-  },
-
-  mounted() {
-  },
-
   methods: {
     onRoleChange(role: Roles) {
       this.Role = role
     },
 
     Next () {
+      this.service.setUser(this.NewUser)
 
+      this.service.toAccountSetup()
     }
   }
 })

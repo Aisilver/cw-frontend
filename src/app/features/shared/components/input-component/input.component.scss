@@ -2,13 +2,13 @@
 @use "/src/partial-styles/animations" as *;
 
 main [input-component] {
-    $paddingLeft: $largeSize;
+    $paddingLeft: $mediumSize;
 
     label {
         position: relative;
         display: flex;
         flex-flow: column;
-        width: clamp(300px, 90%, 600px);
+        width: clamp(250px, 90%, 600px);
         min-height: 45px;
         border: solid 1px $primary;
         border-radius: $smallSize;
@@ -18,11 +18,12 @@ main [input-component] {
             margin-top: $mediumSize;
 
             & > div {
-                height: 0px;
-                top: -($mediumSize + $smallSize);
-                padding-left: 0px;
-                font-size: $mediumSize;
+                top: -$mediumSize;
                 color: $primary;
+                height: max-content;
+                width: max-content;
+                background-color: $white;
+                transform: scale(.7);
             }
         }
 
@@ -40,21 +41,26 @@ main [input-component] {
             position: absolute;
             display: flex;
             align-items: center;
-            padding-left: $paddingLeft;
-            width: 100%;
+            padding: 0 $mediumSize;
+            font-size: $preferred_font_size;
             height: 100%;
             top: 0px;
             left: 0px;
             pointer-events: none;
+            background-color: transparent;
+            transform: scale(1);
             transition: .4s ease;
+            z-index: 2;
         } 
 
         input {
+            position: relative;
             flex: 1;
             border: none;
             outline: none;
             border-radius: inherit;
             font-family: $primary_font;
+            z-index: 1;
         } 
     }
 

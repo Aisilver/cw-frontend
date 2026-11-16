@@ -1,0 +1,9 @@
+@use "/src/partial-styles/variables" as *;
+@use "/src/partial-styles/animations" as *;
+
+main [form-err-message-component] {
+    @include FadeIn;
+    color: $err;
+    font-size: $mediumSize;
+    padding: $smallSize 0;
+}

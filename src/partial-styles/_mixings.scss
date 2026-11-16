@@ -17,13 +17,18 @@
     height: 100vh;
 }
 
+@mixin Disabled () {
+    opacity: .5;
+    pointer-events: none;
+}
+
 @mixin ContentContainer {
     @media (min-width: 1400px) {
-        width: clamp(300px, 80%, 2000px);
+        width: clamp(300px, 90%, 2000px);
     }
 
     @media (max-width: 1400px) {
-        width: clamp(300px, 80%, 1200px);
+        width: clamp(300px, 90%, 1200px);
     }
 }
 

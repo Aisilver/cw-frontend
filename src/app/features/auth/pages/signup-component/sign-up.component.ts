@@ -1,22 +1,22 @@
 import { InjectService } from '@/app/functions/inject-service.func'
 import { defineComponent, ref } from 'vue'
 import { _SignupService } from './services/sign-up.service.ts'
-import imageComponent from '@/app/features/shared/components/image-component/image.component.vue'
 import signUpBioComponent from './components/sign-up-bio/sign-up-bio.component.vue'
 import type { Subscription } from '@/app/classes/subject-event/types'
-import type { SignUpStagesTypes } from './types'
+import signUpAccountComponent from './components/sign-up-account/sign-up-account.component.vue'
 
 export default defineComponent({
   components: {
     signUpBioComponent,
+    signUpAccountComponent
   },
 
   setup() {
-    const service = InjectService(_SignupService)
+    const service = InjectService(_SignupService),
 
-    let Stage = ref(service.SignUpStage.getValue()),
+    Stage = ref(service.SignUpStage.getValue()),
       
-    stageChangeSubs!: Subscription | undefined
+    stageChangeSubs = ref<Subscription | undefined>()
 
     return { service, Stage, stageChangeSubs }
   },
@@ -27,7 +27,7 @@ export default defineComponent({
     })
   },
 
-  methods: {
-
+  beforeUnmount() {
+    this.stageChangeSubs?.unsubscribe()
   }
 })

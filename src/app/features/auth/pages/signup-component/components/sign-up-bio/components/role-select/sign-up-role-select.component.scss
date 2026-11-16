@@ -29,9 +29,14 @@ main [sign-up-role-select-component] {
             background-color: $white;
             color: $pallet_purple;
         }
+
+        @media (max-width: 500px) {
+            padding: $smallSize;
+            font-size: $preferred_font_size;
+        }
     }
 
-    @media (min-height: 800px) {
-        height: 50px;
+    @media (min-height: 850px) {
+        height: 40px;
     }
 }

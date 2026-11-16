@@ -81,7 +81,9 @@ export default defineComponent({
 
     this.InputElement.onfocus = () => this.onFocus()
 
-    if(this.InputElement.required) this.addValidator(RequiredValidator)
+    if(this.InputElement.required) this.addValidator(RequiredValidator) 
+    
+    else this.PlaceHolder += ' (Optional)' 
 
     this.RunValidation(this.InputElement)
 

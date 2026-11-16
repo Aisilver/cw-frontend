@@ -3,8 +3,11 @@
 
 main [role-select-carousel] {
     @include BoxContainer(100px);
+    min-height: 100px;
     position: relative;
-    margin: $largeSize auto;
+    margin: $mediumSize auto;
+    border-radius: $mediumSize;
+    overflow: hidden;
 
     .img-wrap {
         @include BoxContainer(inherit);
@@ -24,7 +27,7 @@ main [role-select-carousel] {
         }
     }
 
-    @media (min-height: 800px) {
+    @media (min-height: 920px) {
         @include BoxContainer(200px);
         margin: ($largeSize * 2) 0px;
     }

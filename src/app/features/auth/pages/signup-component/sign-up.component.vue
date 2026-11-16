@@ -4,5 +4,7 @@
 <template>
     <main sign-up-component>
         <signUpBioComponent v-if="Stage == 'bio'"/>
+
+        <signUpAccountComponent v-if="Stage == 'account-setup'"/>
     </main>
 </template>

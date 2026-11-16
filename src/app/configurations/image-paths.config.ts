@@ -13,5 +13,7 @@ export const APP_IMAGE_PATHs_CONFIGURATIONS = {
 
     SIGN_UP_STUDENT_IMAGE: AssetsPathBuilder({folder: "images", name: "undraw_mathematics_0j2b", ext: "svg"}),
 
-    SIGN_UP_TEACHER_IMAGE: AssetsPathBuilder({folder: "images", name: "undraw_professor_d7zn", ext: "svg"})
+    SIGN_UP_TEACHER_IMAGE: AssetsPathBuilder({folder: "images", name: "undraw_professor_d7zn", ext: "svg"}),
+
+    SIGN_UP_ACCOUNT_SETUP_IMAGE: AssetsPathBuilder({folder: "images", name: "undraw_secure-login_m11a", ext: "svg"})
 }
