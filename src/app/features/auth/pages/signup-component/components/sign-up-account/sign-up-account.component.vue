@@ -5,14 +5,23 @@
     <main sign-up-account-component>
         <h1>Account Setup</h1>
 
-        <imageComponent :src="ImageSrc" :objectFit="'contain'"/>
+        <signUpAccountProfilePicComponent/>
 
-        <formComponent>
+        <formComponent v-slot="{ formKey }" @submit="Submit($event)">
             <label>
-                <inputComponent v-slot="{}">
-                    <input 
-                        type="text">
-                </inputComponent>
+                <label>
+                    <inputComponent ref="UsernameModel" :formContextKey="formKey" :validateOnBlur="true">
+                        <input 
+                            type="text"
+                            name="username"
+                            placeholder="@Username"
+                            required>
+                    </inputComponent>
+
+                    <formErrMessageComponent v-if="UsernameModel?.Model.errors?.['required'] && UsernameModel.Model.dirty">
+                        This Field cannot be emtpy.
+                    </formErrMessageComponent>
+                </label>
             </label>
         </formComponent>
 

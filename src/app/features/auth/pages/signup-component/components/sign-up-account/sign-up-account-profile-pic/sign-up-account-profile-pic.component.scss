@@ -1,0 +1,33 @@
+@use "/src/partial-styles/variables" as *; 
+@use "/src/partial-styles/mixings" as *;
+@use "/src/partial-styles/functions" as *;
+
+main [sign-up-account-profile-pic-component] {
+    position: relative;
+    border: solid 2px $pallet_purple;
+    border-radius: 50%;
+    padding: 3px;
+
+    [image-component] {
+        @include BoxContainer(150px);
+        border-radius: inherit;
+    }
+
+    button {
+        @include BoxContainer(40px);
+        @include NoLine;
+        position: absolute;
+        display: grid;
+        place-items: center;
+        background-color: lighten($color: $pallet_purple, $amount: 20);
+        border: solid 2px $white;
+        bottom: $mediumSize;
+        color: $pallet_purple;
+        right: 0;
+        font-size: $mediumSize + $smallSize;
+        box-shadow: 5px 5px 5px custom_transparentize($black, -.8);
+        border-radius: inherit;
+        cursor: pointer;
+        z-index: 10;
+    }
+}

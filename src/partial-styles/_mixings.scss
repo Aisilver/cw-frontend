@@ -32,6 +32,11 @@
     }
 }
 
+@mixin NoLine {
+    border: none;
+    outline: none;
+}
+
 @mixin WhiteContainer ($bgColor: $white, $shadow: true, $padding: $mediumSize) {
     border-radius: $mediumSize;
     background-color: $bgColor;

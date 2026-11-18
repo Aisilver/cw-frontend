@@ -1,22 +1,28 @@
-import { defineComponent } from "vue";
-import { APP_IMAGE_PATHs_CONFIGURATIONS } from "@/app/configurations/image-paths.config";
+import { defineComponent, ref } from "vue";
 import imageComponent from "@/app/features/shared/components/image-component/image.component.vue";
 import formComponent from "@/app/features/shared/components/form-component/form.component.vue";
 import inputComponent from "@/app/features/shared/components/input-component/input.component.vue";
+import formErrMessageComponent from "@/app/features/shared/components/form-err-message/form-err-message.component.vue";
+import signUpAccountProfilePicComponent from "./sign-up-account-profile-pic/sign-up-account-profile-pic.component.vue";
 
 export default defineComponent({
     components: {
         imageComponent,
         formComponent,
-        inputComponent
+        inputComponent,
+        formErrMessageComponent,
+        signUpAccountProfilePicComponent
     },
 
     setup() {
-        const {SIGN_UP_ACCOUNT_SETUP_IMAGE} = APP_IMAGE_PATHs_CONFIGURATIONS,
+        const UsernameModel = ref< InstanceType<typeof inputComponent> | null>(null)
 
-        ImageSrc = SIGN_UP_ACCOUNT_SETUP_IMAGE
+        return { UsernameModel }
+    },
 
+    methods: {
+        Submit(data: any) {
 
-        return { ImageSrc }
+        }
     }
 })

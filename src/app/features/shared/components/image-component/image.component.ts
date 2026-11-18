@@ -35,11 +35,9 @@ export default defineComponent({
   },
 
   mounted() {
-    if (!this.ImgElement) return
-
-    if(this.src) this.loadImage()
-
     this.setImageFit(this.objectFit)
+
+    this.loadImage()
   },
 
   watch: {
@@ -74,7 +72,7 @@ export default defineComponent({
 
         const url = this.src ?? this.getDefaultImage(this.defaultImage as DefaultImageTypes)
 
-        this.loader?.load(() => new Promise<void>((res) => {
+        this.loader.load(() => new Promise<void>((res) => {
 
             if(!this.ImgElement) throw Error("image element cannot be found")
 

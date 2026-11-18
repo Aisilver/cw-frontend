@@ -14,7 +14,7 @@ main[fade-loader-component] {
         position: absolute;
         content: '';
         background-image: linear-gradient(to right, $bg 0%, custom_transparentize($overlap_bg, -.8) 20%, $bg 50%, $bg 100%);
-        background-size: 450px 400px;
+        background-size: 100% 150%;
         background-repeat: no-repeat;
         animation: shimmer 1s linear infinite;
 

@@ -1,21 +1,19 @@
-import { AdminEntity } from "../admin.entity";
-import { ParentEntity } from "../parent.entity";
-import { StudentEntity } from "../student.entity";
-import { TeacherEntity } from "../teacher.entity";
-import { UserEntity } from "../user.entity";
+import { Account, Admin, Parent, Student, Teacher, User } from "..";
 
 export type CollectionTypeDefinition = {
-    users: UserEntity,
+    users: User,
     
-    teachers: TeacherEntity;
+    teachers: Teacher;
+
+    account: Account;
     
     lessons: any;
 
-    parents: ParentEntity;
+    parents: Parent;
 
-    admins: AdminEntity;
+    admins: Admin;
 
-    students: StudentEntity;   
+    students: Student;   
 
     enrollments: any;
 }

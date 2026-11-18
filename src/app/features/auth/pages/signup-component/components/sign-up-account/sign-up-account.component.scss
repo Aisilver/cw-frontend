@@ -5,6 +5,7 @@ main [sign-up-account-component] {
     display: flex;
     flex-flow: column;
     align-items: center;
+    justify-content: center;
     gap: $largeSize;
     padding: $largeSize;
 
@@ -12,8 +13,7 @@ main [sign-up-account-component] {
         color: $pallet_purple
     }
 
-    [image-component] {
-        @include BoxContainer(200px);
-        margin: $largeSize 0;
+    [form-component] {
+        width: clamp(250px, 100%, 600px);
     }
 }

@@ -89,7 +89,7 @@ class ServerCallService {
         .map((query) => {
           const [key, value] = query
 
-          return `${key}=${value}`
+          return `${key}=${value}` 
         })
         .join('&')
     }
