@@ -1,13 +1,11 @@
-import { Account, Admin, Parent, Student, Teacher, User } from "..";
+import { Account, Admin, Enrollment, Media, Parent, Product, Student, Teacher, User } from "..";
 
 export type CollectionTypeDefinition = {
     users: User,
     
-    teachers: Teacher;
-
     account: Account;
-    
-    lessons: any;
+
+    teachers: Teacher;
 
     parents: Parent;
 
@@ -15,5 +13,9 @@ export type CollectionTypeDefinition = {
 
     students: Student;   
 
-    enrollments: any;
+    media: Media;
+
+    lessons: Product;
+
+    enrollments: Enrollment;
 }

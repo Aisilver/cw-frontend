@@ -1,0 +1,39 @@
+@use "/src/partial-styles/variables" as *; 
+
+@mixin SpinnerBorderColorSetter ($color) {
+  border-top-color: $color;
+  border-right-color: $color;
+  border-bottom-color: $color;
+  border-left-color: transparent;
+}
+
+main [spinner-loader-component] {
+  display: grid;
+  place-items: center;
+
+  &.primary {
+      background-color: $white; 
+
+      .spinner {
+        @include SpinnerBorderColorSetter($primary)
+      }
+  }
+
+  .spinner {
+      border: 4px solid;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      animation: spin89345 1s linear infinite;
+
+      @keyframes spin89345 {
+        0% {
+          transform: rotate(0deg);
+        }
+    
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+  }
+}

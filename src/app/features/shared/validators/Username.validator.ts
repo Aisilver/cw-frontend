@@ -1,6 +1,6 @@
-import type { Validator } from "@/app/interfaces/validator.int";
+import { Validator } from "@/app/abs-classes/validator.abs.class";
 
-export class Usernamevalidator implements Validator {
+export class Usernamevalidator extends Validator {
     isAsync: boolean = true;
 
     validate(target: HTMLInputElement): {} | null {

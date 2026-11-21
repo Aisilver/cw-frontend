@@ -27,9 +27,9 @@ class ServerCallService {
   ): CallMethods<Data> {
     const url = this.urlFormatter(params, queries),
       headers = new Headers(),
-      { doNotIncludeAccessToken } = opt
+      { doNotIncludeAccessToken, bodyIsNotJSON } = opt
 
-    headers.append('Content-type', 'application/json; charset=utf-8')
+    if(!bodyIsNotJSON) headers.append('Content-type', 'application/json; charset=utf-8')
 
     if (!doNotIncludeAccessToken) {
       const { AccessToken } = InjectService(_UserService)
@@ -40,9 +40,9 @@ class ServerCallService {
     return {
       get: () => this.generateHttpPromise(url, 'get', headers),
 
-      post: (body: object) => this.generateHttpPromise(url, 'post', headers, body),
+      post: (body: object) => this.generateHttpPromise(url, 'post', headers, bodyIsNotJSON ? body : JSON.stringify(body)),
 
-      put: (body: object) => this.generateHttpPromise(url, 'put', headers, body),
+      put: (body: object) => this.generateHttpPromise(url, 'put', headers, bodyIsNotJSON ? body : JSON.stringify(body)),
 
       delete: () => this.generateHttpPromise(url, 'delete', headers),
     }
@@ -59,7 +59,7 @@ class ServerCallService {
         headers,
         method,
         ...(data && {
-          body: JSON.stringify(data),
+          body: data,
         }),
       })
         .then(async (response) => {

@@ -8,7 +8,7 @@
         
         <signUpRoleImageCarouselComponent :Role="Role"/>
 
-        <signUpRoleSelectComponent @onRoleChange="onRoleChange($event)"/>
+        <signUpRoleSelectComponent @onRoleChange="onRoleChange()"/>
 
         <formComponent v-slot="{ formKey, valid }" @submit="Next()">
 

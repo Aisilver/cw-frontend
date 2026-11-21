@@ -13,21 +13,24 @@ main [sign-up-account-profile-pic-component] {
         border-radius: inherit;
     }
 
-    button {
+    [loader-component]:nth-child(2) {
         @include BoxContainer(40px);
-        @include NoLine;
         position: absolute;
-        display: grid;
-        place-items: center;
-        background-color: lighten($color: $pallet_purple, $amount: 20);
-        border: solid 2px $white;
         bottom: $mediumSize;
-        color: $pallet_purple;
         right: 0;
-        font-size: $mediumSize + $smallSize;
         box-shadow: 5px 5px 5px custom_transparentize($black, -.8);
-        border-radius: inherit;
-        cursor: pointer;
         z-index: 10;
+
+        label {
+            flex: 1;
+            display: grid;
+            place-items: center;
+            background-color: lighten($color: $pallet_purple, $amount: 20);
+            border: solid 2px $white;
+            color: $pallet_purple;
+            font-size: $mediumSize + $smallSize;
+            border-radius: inherit;
+            cursor: pointer;
+        }
     }
 }

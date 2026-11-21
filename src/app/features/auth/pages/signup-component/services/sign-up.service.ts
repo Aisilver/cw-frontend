@@ -5,26 +5,31 @@ import { DefineService } from "@/app/functions/define-service.func";
 import type { Roles } from "@shared/common"; 
 import type { SignUpStagesTypes } from "../types";
 import type { Account, User } from "@shared/entities";
+import type { SignUpRequestData } from "@shared/routes";
 
 class SigunUpService {
-    private declare user: User
-
-    private declare account: Account
-
-    getNewUserObject () {
-        return CopyOf(APP_ENTITY_DUMMY_DATA.USER)
-    }
+    private payload: SignUpRequestData = Object()
 
     Role = new BehaviouralSubject<Roles>("student")
 
     SignUpStage = new BehaviouralSubject<SignUpStagesTypes>("account-setup")
 
-    setUser(user: User) {
-        this.user = user
+    get NewUser () {
+        return this.payload.user
     }
 
-    setAccount(acct: Account) {
-        this.account = acct
+    get NewAccount () {
+        return this.payload.account
+    }
+
+    setUser(user: User) {
+        this.payload.user = user
+    }
+
+    setAccount(acct: Account, proileImgFileRef?: string) {
+        this.payload.account = acct
+
+        this.payload.profileImageRef = proileImgFileRef
     }
 
     toAccountSetup () {

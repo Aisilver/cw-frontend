@@ -5,7 +5,7 @@
     <main sign-up-account-component>
         <h1>Account Setup</h1>
 
-        <signUpAccountProfilePicComponent/>
+        <signUpAccountProfilePicComponent @profile_image_ref="OnProfileImageSet($event)"/>
 
         <formComponent v-slot="{ formKey }" @submit="Submit($event)">
             <label>
@@ -14,6 +14,7 @@
                         <input 
                             type="text"
                             name="username"
+                            v-model="NewAccount.userName"
                             placeholder="@Username"
                             required>
                     </inputComponent>

@@ -6,33 +6,33 @@ import type { ApiResponse } from '@shared/common'
 export abstract class RouteHandler {
   declare private routePrefix: string
 
-  constructor(routePrefix?: string) {
-    if (routePrefix) this.routePrefix = routePrefix
+  constructor(routePrefix: string) {
+    if(routePrefix) this.routePrefix = routePrefix
   }
 
   protected httpCall<Data = unknown>(
-    params: (string | number)[] | string = '',
+    params: (string | number)[] | string,
     queries = {},
     opt: ServerCallBehavior = {},
   ) {
     const serverCallService = InjectService(_ServerCallService)
 
-    if (this.routePrefix) {
-      if (typeof params == 'string') params = [this.routePrefix, params]
-      else params = [this.routePrefix, ...params]
-    }
+    if(typeof params == "string")
+      params = [this.routePrefix, params]
+    else 
+      params = [this.routePrefix, ...params]
 
     return serverCallService.call<Data>(params, queries, opt)
   }
 
-  responseChecker<ResponseData>(
+  responseChecker<ResponseData = unknown>(
     response: ApiResponse<ResponseData>,
-    onSuccess?: (data?: ResponseData) => void,
+    onSuccess?: (data: ResponseData) => void,
     onFail?: () => void,
   ) {
     const { state, data } = response
 
-    if (onSuccess && state == 'succeeded') onSuccess(data)
+    if (onSuccess && state == 'succeeded') onSuccess(data as any)
     else if (onFail && state == 'failed') onFail()
 
     return state == 'succeeded'

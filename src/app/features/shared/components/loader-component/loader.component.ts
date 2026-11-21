@@ -1,21 +1,26 @@
 import { Animator } from "@/app/classes/animator/animator.class";
 import { createVNode, defineComponent, ref, render } from "vue";
+import type { LoaderTypeOptions } from "./types.ts";
 import FadeLoaderComponent from "./loaders/fade-loader/fade-loader.component.vue";
+import SpinnerLoaderComponent from "./loaders/spinner-loader/spinner-loader.component.vue";
+import { Delay } from "@/app/functions/delay.func.ts";
 
-type LoaderTypes = "fade-loader"
+
+// From ChatGPT
+
+type LoaderParameter = {
+    [K in keyof LoaderTypeOptions]: LoaderTypeOptions[K] extends void ? K : K | { [P in K]: LoaderTypeOptions[K] }
+}[keyof LoaderTypeOptions];
+
+// END of ChatGPT input
 
 export default defineComponent({
     components: {
-        FadeLoaderComponent
+        FadeLoaderComponent,
+        SpinnerLoaderComponent
     },
 
-    props: {
-        type: {
-            type: String
-        }
-    },
-
-    setup(props) {
+    setup() {
         const FloatDOMElement = ref<HTMLElement | null>(null),
 
         LoaderContainer = ref<HTMLElement | null>(null),
@@ -32,20 +37,27 @@ export default defineComponent({
 
         if(!content) return
 
+        this.animator.set(ui_float as HTMLElement, {pointerEvents: "none"})
+
         this.animator.set(content as HTMLElement, {flex: "1"})
     },
 
     methods: {
-        getloader () {
-            switch(this.type as LoaderTypes) {
+
+        getloader (type: keyof LoaderTypeOptions) {
+            switch(type) {
                 case "fade-loader": return FadeLoaderComponent
+
+                case "spinner-loader": return  SpinnerLoaderComponent
+
+                default: throw Error(`unknown loader type: "${type}"`)
             }
         },
 
-        showLoader () {
+        showLoader (loaderType: keyof LoaderTypeOptions, opts?: any) {
             if(!this.FloatDOMElement) throw Error("failed to open: loader container cannot be found")
 
-            const vnode = createVNode(this.getloader())
+            const vnode = createVNode(this.getloader(loaderType), {opts})
 
             render(vnode, this.FloatDOMElement)
 
@@ -62,18 +74,24 @@ export default defineComponent({
             this.animator.set(this.FloatDOMElement, {pointerEvents: "none"})
         },
 
-        delay (timeDelay = 0) {
-            return new Promise<void>((res) => setTimeout(() => res(), timeDelay))
-        },
-
-        async load<Data = unknown>(target: () => Promise<Data>) {
+        async load<Data = unknown>(target: () => Promise<Data>, opts: LoaderParameter = "fade-loader") {
             let targetValue: Data
 
-            this.showLoader()
+            if(typeof opts == "string")
+                this.showLoader(opts)
+            else {
+                const loaderOption = Object.entries(opts)[0]
+
+                if(!loaderOption) throw Error("cannot pass an empty loader options object")
+
+                const [loaderType, loaderTypeArg] = loaderOption
+
+                this.showLoader(loaderType as any, loaderTypeArg)
+            }
 
             targetValue = await target()
 
-            this.delay(1000).then(() => this.closeLoader())
+            Delay(1000).then(() => this.closeLoader())
 
             return targetValue
         }

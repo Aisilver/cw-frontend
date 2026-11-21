@@ -8,6 +8,7 @@ import formComponent from '@/app/features/shared/components/form-component/form.
 import signUpRoleImageCarouselComponent from './components/role-image-carousel/sign-up-role-image-carousel.component.vue'
 import FormErrMessageComponent from '@/app/features/shared/components/form-err-message/form-err-message.component.vue'
 import radioComponent from '@/app/features/shared/components/radio-component/radio.component.vue'
+import { APP_ENTITY_DUMMY_DATA } from '@/app/configurations/dummy-entity-data.config.ts'
 
 export default defineComponent({
   components: {
@@ -30,7 +31,7 @@ export default defineComponent({
 
     Role = ref<Roles>(service.Role.getValue()),
 
-    NewUser = ref(service.getNewUserObject())
+    NewUser = ref(service.NewUser ?? APP_ENTITY_DUMMY_DATA.USER)
 
     return { 
       service, 
@@ -43,8 +44,8 @@ export default defineComponent({
   },
 
   methods: {
-    onRoleChange(role: Roles) {
-      this.Role = role
+    onRoleChange() {
+      this.Role = this.service.Role.getValue()
     },
 
     Next () {

@@ -9,8 +9,13 @@
             </template>
         </loader-component>
 
-        <button>
-            <iconComponent name="pen"/>
-        </button>
+        <loaderComponent ref="FileUploadLoader">
+            <template #content>
+                <label for="file-input">
+                    <input type="file" id="file-input" ref="FileInputElement" hidden @change="OnFileInput($event)">
+                    <iconComponent name="pen"/>
+                </label>
+            </template>
+        </loaderComponent>
     </main>
 </template>

@@ -1,4 +1,4 @@
-import type { User } from "@shared/entities";
+import type { Account, User } from "@shared/entities";
 
 export const APP_ENTITY_DUMMY_DATA = {
     USER: {
@@ -6,5 +6,10 @@ export const APP_ENTITY_DUMMY_DATA = {
         lastName: "",
         gender: "male",
         maritalStatus: "single"
-    } as User
+    } as User,
+
+    ACCOUNT: {
+        userName: "",
+        password: ""
+    } as Account
 }

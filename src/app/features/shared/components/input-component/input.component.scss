@@ -1,5 +1,6 @@
 @use "/src/partial-styles/variables" as *;
 @use "/src/partial-styles/animations" as *;
+@use "/src/partial-styles/functions" as *;
 
 main [input-component] {
     $paddingLeft: $mediumSize;
@@ -40,6 +41,7 @@ main [input-component] {
             position: absolute;
             display: flex;
             align-items: center;
+            color: custom_transparentize($black);
             border-radius: 50%;
             padding: 0 $mediumSize;
             font-size: $preferred_font_size;

@@ -5,5 +5,6 @@ export type EncryptedResponse = {
 }
 
 export type ServerCallBehavior = {
-    doNotIncludeAccessToken?: boolean
+  doNotIncludeAccessToken?: boolean,
+  bodyIsNotJSON?: boolean
 }
