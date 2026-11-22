@@ -1,4 +1,4 @@
-import iconComponent from "@/app/features/shared/components/icon-component/icon-component.vue";
+import iconComponent from "@/app/features/shared/components/icon-component/icon.component.vue";
 import imageComponent from "@/app/features/shared/components/image-component/image.component.vue";
 import loaderComponent from "@/app/features/shared/components/loader-component/loader.component.vue";
 import { InjectService } from "@/app/functions/inject-service.func";

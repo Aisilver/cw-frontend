@@ -1,3 +1,3 @@
 export const APP_REGEXES_CONFIGURATIONS = {
-    EMAIL_REGEX: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    MUST_START_WITH_A_LETTER: /^[a-zA-Z]/,    
 }

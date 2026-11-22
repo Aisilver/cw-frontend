@@ -1,0 +1,9 @@
+main {
+    svg {
+        display:  none;
+
+        &:nth-child(1) {
+            display: block;
+        }
+    }
+}

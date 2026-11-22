@@ -1,69 +1,125 @@
 @use "/src/partial-styles/variables" as *;
+@use "/src/partial-styles/mixings" as *;
 @use "/src/partial-styles/animations" as *;
 @use "/src/partial-styles/functions" as *;
 
 main [input-component] {
     $paddingLeft: $mediumSize;
+    display: flex;
+    flex-flow: column;
+    gap: $mediumSize;
 
-    label {
-        position: relative;
+    .wrapper {
         display: flex;
-        flex-flow: column;
+        align-items: center;
+        gap: $mediumSize;
         min-height: 45px;
-        border: solid 1px $primary;
-        border-radius: $smallSize;
-        padding-left: $paddingLeft;
 
         &.hasValue {
             margin-top: $mediumSize;
-
-            & > div {
-                top: -$mediumSize;
-                color: $primary;
-                height: max-content;
-                width: max-content;
-                background-color: $white;
-                transform: scale(.7);
-            }
         }
 
-        &.hasError {
-            border-color: $err;
-            @include ShakeAnimation;
- 
-            & > div {
-                color: $err;
-            }
-        }
-
-
-        & > div {
-            position: absolute;
-            display: flex;
-            align-items: center;
-            color: custom_transparentize($black);
-            border-radius: 50%;
-            padding: 0 $mediumSize;
-            font-size: $preferred_font_size;
-            height: 100%;
-            top: 0px;
-            left: 0px;
-            pointer-events: none;
-            background-color: transparent;
-            transform: scale(1);
-            transition: .4s ease;
-            z-index: 2;
-        } 
-
-        input {
-            position: relative;
+        .input-wrapper {
             flex: 1;
-            border: none;
-            outline: none;
-            border-radius: inherit;
-            font-family: $primary_font;
-            z-index: 1;
-        } 
-    }
+            position: relative;
+            display: flex;
+            border: solid 1px $primary;
+            border-radius: $smallSize;
+            padding-left: $paddingLeft;
+            min-height: inherit;
 
+            &.isValidating {
+                & > *:not(div) {
+                    @include Disabled;
+                }
+            }
+
+            &.hasValue {
+                & > div {
+                    top: -$mediumSize;
+                    color: $primary;
+                    height: max-content;
+                    width: max-content;
+                    background-color: $white;
+                    transform: scale(.7);
+                }
+            }
+
+            &.hasError {
+                border-color: $err;
+                @include ShakeAnimation;
+            
+                & > div {
+                    color: $err;
+                }
+            }
+
+
+            & > div {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                color: custom_transparentize($black);
+                border-radius: 50%;
+                padding: 0 $mediumSize;
+                font-size: $preferred_font_size;
+                height: 100%;
+                top: 0px;
+                left: 0px;
+                pointer-events: none;
+                background-color: transparent;
+                transform: scale(1);
+                transition: .4s ease;
+                z-index: 2;
+            } 
+
+            input {
+                position: relative;
+                flex: 1;
+                border: none;
+                outline: none;
+                border-radius: inherit;
+                font-family: $primary_font;
+                z-index: 1;
+            } 
+        }
+
+        .password-toggle {
+            @include BoxContainer (45px);
+            @include NoLine;
+            display: grid;
+            place-items: center;
+            border-radius: $mediumSize;
+            background-color: $primary;
+            color: $white;
+            font-size: $mediumSize + $smallSize;
+            cursor: pointer;
+        }
+    }
+    
+    .min-loader {
+        height: 2px;
+        position: relative;
+        overflow: hidden;
+
+        .line {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, transparent, $primary, transparent);
+            left: 0;
+            top: 0;
+            animation: leftToRight .5s infinite;
+        }
+
+        @keyframes leftToRight {
+            from {
+                transform: translateX(-50%);
+            }
+
+            to {
+                transform: translateX(50%);
+            }
+        }
+    }
 }

@@ -4,13 +4,33 @@
 <template>
     
     <main input-component>
-        <label ref="LabelHolderElement" :class="{hasValue: HasValue && PlaceHolder, hasError: HasError}">
+        <div class="wrapper" :class="{hasValue: HasValue && PlaceHolder}">
+            
+            <div 
+                class="input-wrapper" 
+                ref="LabelHolderElement" 
+                :class="{
+                    hasValue: HasValue && PlaceHolder, 
+                    hasError: HasError, 
+                    isValidating: IsvalidatingAsync
+                }">
 
-            <div v-if="PlaceHolder">{{ PlaceHolder }}</div>
-         
-            <slot />
+                <div v-if="PlaceHolder">{{ PlaceHolder }}</div>
+                
+                <slot />
         
-        </label>
+            </div>
+
+            <button type="button" class="password-toggle" v-if="TypeOfInputIsPassword" @click="TogglePasswordView">
+                <iconComponent v-if="PasswordIsHidden" name="eye"/>
+
+                <iconComponent  v-if="!PasswordIsHidden" name="eye-slash"/>
+            </button>
+        </div>
+
+        <div class="min-loader" v-if="IsvalidatingAsync">
+            <div class="line"></div>
+        </div>
     </main>
 
 </template>

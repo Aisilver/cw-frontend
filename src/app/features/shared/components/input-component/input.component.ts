@@ -6,8 +6,13 @@ import { RequiredValidator } from '../../validators/Required.validator'
 import type { FormContext } from '@/app/interfaces/form-context.int'
 import { Subject } from '@/app/classes/subject-event/subject-event.class'
 import type { Subscription } from '@/app/classes/subject-event/types'
+import iconComponent from '../icon-component/icon.component.vue'
 
 export default defineComponent({
+  components: {
+    iconComponent
+  },
+
   props: {
     formContextKey: {
       type: Symbol as PropType<InjectionKey<FormContext>>
@@ -30,6 +35,10 @@ export default defineComponent({
       LabelHolderElement = ref<HTMLElement | null>(null),
 
       InputElement = ref<HTMLInputElement | null>(null),
+
+      TypeOfInputIsPassword = ref(false),
+
+      PasswordIsHidden = ref(true),
             
       HasValue = ref(false),
       
@@ -41,7 +50,9 @@ export default defineComponent({
       
       Validators = ref<Validator[]>([]),
 
-      ErrorMap = ref(new Map<string, Record<string, boolean>>())
+      ErrorMap = ref(new Map<string, Record<string, boolean>>()),
+
+      IsvalidatingAsync = ref(false)
 
     return {
       FormContext,
@@ -49,12 +60,15 @@ export default defineComponent({
       Name,
       LabelHolderElement,
       InputElement,
+      TypeOfInputIsPassword,
+      PasswordIsHidden,
       HasValue,
       Model,
       innerModelChangeEvent,
       innerModelChangeEventSubs,
       Validators,
-      ErrorMap
+      ErrorMap,
+      IsvalidatingAsync
     }
   },
 
@@ -72,6 +86,8 @@ export default defineComponent({
     this.Name = name
 
     this.PlaceHolder = placeholder
+
+    this.TypeOfInputIsPassword = this.InputElement.type == "password"
 
     this.InputElement.placeholder = ''
 
@@ -107,9 +123,9 @@ export default defineComponent({
 
       for (const validator of this.Validators) {
 
-        const {id} = validator,
-        
-        err = await validator.validate(input)
+        const {id} = validator
+
+        const err = await validator.validate(input)
 
         if(err) this.ErrorMap.set(id, err)
 
@@ -124,7 +140,7 @@ export default defineComponent({
     },
 
     async RunValidation (input: HTMLInputElement) {
-      this.innerModelChangeEvent.emit({...this.Model, pendingEvaluation: true})
+      this.innerModelChangeEvent.emit({...this.Model, errors: undefined, pendingEvaluation: true})
 
       const errors = await this.runValidations(input); 
       
@@ -156,10 +172,35 @@ export default defineComponent({
       this.HasValue = true
     },
 
+    startAsyncValidationProcess() {
+      this.InputElement?.blur()
+
+      this.IsvalidatingAsync = true
+    },
+
+    endAsyncValidationProcess() {
+      this.IsvalidatingAsync = false
+    },
+
     addValidator(ValidatorClass: ValidatorConstructor) {
       const val = new ValidatorClass()
 
+      //@ts-ignore
+      val.setComponentInstance(this)
+
       this.Validators.push(val)
+    },
+
+    TogglePasswordView () {
+      if(!this.InputElement) return
+
+      const {type} = this.InputElement
+
+      if(type == "text") this.InputElement.type = "password"
+
+      else this.InputElement.type = "text"
+
+      this.PasswordIsHidden = this.InputElement.type == "password"
     }
   },
 
