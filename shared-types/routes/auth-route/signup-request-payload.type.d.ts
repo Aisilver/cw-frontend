@@ -1,7 +1,7 @@
 import { Roles } from "../../common"
 import { Account, User } from "../../entities"
 
-export type SignUpRequestData = {
+export type SignUpRequestPayload = {
     role: Roles,
     user: User,
     account: Account,

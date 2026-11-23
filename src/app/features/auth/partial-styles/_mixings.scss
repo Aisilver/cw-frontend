@@ -1,0 +1,14 @@
+@use "/src/partial-styles//variables" as *;
+
+@mixin AuthHeader {
+    color: $pallet_purple;
+    text-align: center;
+
+    &::first-letter {
+        text-transform: capitalize;
+    }
+
+    @media (max-width: 500px) {
+        font-size: $mediumSize * 2;
+    }
+}

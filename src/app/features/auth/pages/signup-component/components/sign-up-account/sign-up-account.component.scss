@@ -1,5 +1,6 @@
 @use "/src/partial-styles/variables" as *; 
 @use "/src/partial-styles/mixings" as *;
+@use "../../../../partial-styles//mixings" as *;
 
 main [sign-up-account-component] {
     display: flex;
@@ -10,10 +11,42 @@ main [sign-up-account-component] {
     padding: $largeSize;
 
     h1 {
-        color: $pallet_purple
+        @include AuthHeader;
     }
 
     [form-component] {
         width: clamp(250px, 100%, 600px);
+
+        .btn-wrap {
+            display: flex;
+            gap: $largeSize;
+            justify-content: center;
+
+            button {
+                @include NoLine;
+                display: grid;
+                place-items: center;
+                width: clamp(150px, 50%, 200px);
+                border-radius: $smallSize;
+                padding: $mediumSize 0;
+                cursor: pointer;
+                transition: .4s ease;
+
+                &:nth-child(1) {
+                    background: transparent;
+                    border: solid 2px $primary;
+                    color: $primary;
+                }
+
+                &:nth-child(2) {
+                    background-color: $primary;
+                    color: $white;
+
+                    &.disabled {
+                        @include Disabled;
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 @use "/src/partial-styles/variables" as *; 
 @use "/src/partial-styles/mixings" as *;
+@use "../../../../partial-styles//mixings" as *;
 
 main [sign-up-bio-component] {
     display: flex;
@@ -10,7 +11,7 @@ main [sign-up-bio-component] {
     overflow-y: scroll;
 
     h1 {
-        color: $pallet_purple
+        @include AuthHeader;
     }
 
     [form-component] {

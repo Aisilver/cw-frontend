@@ -20,6 +20,12 @@ export default defineComponent({
         SpinnerLoaderComponent
     },
 
+    props: {
+        hideContent: {
+            type: Boolean
+        }
+    },
+
     setup() {
         const FloatDOMElement = ref<HTMLElement | null>(null),
 
@@ -40,6 +46,8 @@ export default defineComponent({
         this.animator.set(ui_float as HTMLElement, {pointerEvents: "none"})
 
         this.animator.set(content as HTMLElement, {flex: "1"})
+
+        if(this.hideContent) this.animator.set(content as HTMLElement, {opacity: "0"})
     },
 
     methods: {
@@ -70,6 +78,14 @@ export default defineComponent({
             if(!this.FloatDOMElement) throw Error("failed to close: loader container cannot be found")
 
             render(null, this.FloatDOMElement)
+
+            if(this.hideContent) {
+                if(!this.LoaderContainer) return
+
+                const [ui_float, content] = this.LoaderContainer.children
+                
+                this.animator.set(content as HTMLElement, {opacity: "1"})
+            }
 
             this.animator.set(this.FloatDOMElement, {pointerEvents: "none"})
         },

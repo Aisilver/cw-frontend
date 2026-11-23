@@ -6,5 +6,7 @@
         <signUpBioComponent v-if="Stage == 'bio'"/>
 
         <signUpAccountComponent v-if="Stage == 'account-setup'"/>
+
+        <signUpCreateAccountComponent v-if="Stage == 'account-creation'"/>
     </main>
 </template>

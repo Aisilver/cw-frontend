@@ -1,1 +1,1 @@
-export * from "./signup-request-data.type"
+export * from "./signup-request-payload.type";

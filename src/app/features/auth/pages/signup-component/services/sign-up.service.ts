@@ -1,18 +1,16 @@
 import { BehaviouralSubject } from "@/app/classes/subject-event/behavioural-subject-event.class";
-import { APP_ENTITY_DUMMY_DATA } from "@/app/configurations/dummy-entity-data.config";
-import { CopyOf } from "@/app/functions/copy-of.func";
 import { DefineService } from "@/app/functions/define-service.func";
 import type { Roles } from "@shared/common"; 
 import type { SignUpStagesTypes } from "../types";
 import type { Account, User } from "@shared/entities";
-import type { SignUpRequestData } from "@shared/routes";
+import type { SignUpRequestPayload } from "@shared/routes";
 
 class SigunUpService {
-    private payload: SignUpRequestData = Object()
+    private payload: SignUpRequestPayload = Object()
 
     Role = new BehaviouralSubject<Roles>("student")
 
-    SignUpStage = new BehaviouralSubject<SignUpStagesTypes>("account-setup")
+    SignUpStage = new BehaviouralSubject<SignUpStagesTypes>("bio")
 
     get NewUser () {
         return this.payload.user
@@ -20,6 +18,13 @@ class SigunUpService {
 
     get NewAccount () {
         return this.payload.account
+    }
+
+    get Payload (): SignUpRequestPayload {
+        return {
+            ...this.payload,
+            role: this.Role.getValue()
+        }
     }
 
     setUser(user: User) {
@@ -32,12 +37,16 @@ class SigunUpService {
         this.payload.profileImageRef = proileImgFileRef
     }
 
+    toBio () {
+        this.SignUpStage.emit("bio")
+    }
+
     toAccountSetup () {
         this.SignUpStage.emit("account-setup")
     }
 
-    toFinished () {
-        this.SignUpStage.emit("finished")
+    toCreateAccount () {
+        this.SignUpStage.emit("account-creation")
     }
 }
 

@@ -1,0 +1,42 @@
+@use "/src/partial-styles/variables" as *; 
+@use "/src/partial-styles/mixings" as *;
+@use "../../../../partial-styles//mixings" as *;
+
+main [sign-up-create-account-component] {
+    display:  flex;
+    
+    [loader-component] {
+        section {
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            gap: $largeSize;
+
+            h1{
+                @include AuthHeader;
+
+                &.failed {
+                    color: $err;
+                }
+            }
+
+            [image-component] {
+                width: clamp(100px, 80%, 500px);
+                margin: $largeSize;
+            }
+
+            button {
+                @include NoLine;
+                width: 200px;
+                padding: $mediumSize 0px;
+                border-radius: $mediumSize;
+                border: solid $pallet_purple;
+                background-color: transparent;
+                font-weight: bold;
+                color: $pallet_purple;
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -9,6 +9,7 @@ import { _SignupService } from "../../services/sign-up.service.ts";
 import type { Account } from "@shared/entities/account.entity.js";
 import { APP_ENTITY_DUMMY_DATA } from "@/app/configurations/dummy-entity-data.config.ts";
 import { Usernamevalidator } from "@/app/features/shared/validators/Username.validator.ts";
+import { PasswordValidator } from "@/app/features/shared/validators/Password.validator.ts";
 
 export default defineComponent({
     components: {
@@ -26,15 +27,37 @@ export default defineComponent({
 
         PasswordWodel = ref< InstanceType<typeof inputComponent> | null>(null),
 
-        ProfileImageRef = ref<string | null>(null),
+        ComfirmPasswordModel =  ref< InstanceType<typeof inputComponent> | null>(null),
 
-        NewAccount = ref<Account>(service.NewAccount ?? APP_ENTITY_DUMMY_DATA.ACCOUNT)
+        ProfileImageRef = ref<string>(),
 
-        return { UsernameModel, PasswordWodel, ProfileImageRef, service, NewAccount }
+        NewAccount = ref<Account>(APP_ENTITY_DUMMY_DATA.ACCOUNT),
+
+        ConfirmPasswordValue = ref<string>("")
+
+        return { 
+            UsernameModel, 
+            PasswordWodel, 
+            ProfileImageRef, 
+            service, 
+            NewAccount, 
+            ComfirmPasswordModel, 
+            ConfirmPasswordValue
+        }
     },
 
     mounted() {
         this.UsernameModel?.addValidator(Usernamevalidator)
+
+        this.PasswordWodel?.addValidator(PasswordValidator)
+
+        this.NewAccount = APP_ENTITY_DUMMY_DATA.ACCOUNT
+    },
+
+    computed: {
+        PasswordIsConfirmed () {
+            return this.NewAccount.password == this.ConfirmPasswordValue
+        }
     },
 
     methods: {
@@ -42,8 +65,14 @@ export default defineComponent({
             this.ProfileImageRef = fileRef
         },
 
-        Submit(data: any) {
+        Back () {
+            this.service.toBio()
+        },
 
+        Submit() {
+            this.service.setAccount(this.NewAccount, this.ProfileImageRef)
+
+            this.service.toCreateAccount()
         }
     }
 })

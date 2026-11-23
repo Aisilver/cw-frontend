@@ -1,3 +1,9 @@
 export const APP_REGEXES_CONFIGURATIONS = {
-    MUST_START_WITH_A_LETTER: /^[a-zA-Z]/,    
+    MUST_START_WITH_A_LETTER: /^[a-zA-Z]/, 
+    
+    MUST_HAVE_A_NUMBER: /[0-9]/,
+
+    MUST_HAVE_A_CAPITAL_LETTER: /[A-Z]/,
+
+    MUST_HAVE_A_SYMBOL: /[^a-zA-Z0-9\s]/
 }

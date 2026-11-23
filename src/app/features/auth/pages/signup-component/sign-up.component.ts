@@ -4,11 +4,13 @@ import { _SignupService } from './services/sign-up.service.ts'
 import signUpBioComponent from './components/sign-up-bio/sign-up-bio.component.vue'
 import type { Subscription } from '@/app/classes/subject-event/types'
 import signUpAccountComponent from './components/sign-up-account/sign-up-account.component.vue'
+import signUpCreateAccountComponent from './components/sign-up-create-account/sign-up-create-account.component.vue'
 
 export default defineComponent({
   components: {
     signUpBioComponent,
-    signUpAccountComponent
+    signUpAccountComponent,
+    signUpCreateAccountComponent
   },
 
   setup() {

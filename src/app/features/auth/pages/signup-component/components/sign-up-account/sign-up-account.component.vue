@@ -7,7 +7,7 @@
 
         <signUpAccountProfilePicComponent @profile_image_ref="OnProfileImageSet($event)"/>
 
-        <formComponent v-slot="{ formKey }" @submit="Submit($event)">
+        <formComponent v-slot="{ formKey, valid }" @submit="Submit()">
             <label>
                 <inputComponent ref="UsernameModel" :formContextKey="formKey">
                     <input 
@@ -48,7 +48,52 @@
                         placeholder="Password"
                         required>
                 </inputComponent>
+                
+                <formErrMessageComponent v-if="PasswordWodel?.Model.dirty && PasswordWodel?.Model.errors?.['required']">
+                   This field cannot be empty.
+                </formErrMessageComponent>
+
+                <formErrMessageComponent v-if="PasswordWodel?.Model.errors?.['MUST_HAVE_CAPITAL_LETTER']">
+                   Password must contain a capital letter.
+                </formErrMessageComponent>
+
+                <formErrMessageComponent v-if="PasswordWodel?.Model.errors?.['MUST_HAVE_A_NUMBER']">
+                   Password must contain a number.
+                </formErrMessageComponent>
+
+                <formErrMessageComponent v-if="PasswordWodel?.Model.errors?.['MUST_HAVE_A_SYMBOL']">
+                   Password must contain a symbol.
+                </formErrMessageComponent>
+
+                <formErrMessageComponent v-if="PasswordWodel?.Model.errors?.['TOO_SHORT']">
+                   Password must be at least 6 characters long.
+                </formErrMessageComponent>
             </label>
+
+            <label>
+                <inputComponent ref="ComfirmPasswordModel" :formContextKey="formKey">
+                    <input 
+                        type="password"
+                        name="password"
+                        v-model="ConfirmPasswordValue"
+                        placeholder="Confirm password"
+                        required>
+                </inputComponent>
+
+                <formErrMessageComponent v-if="ComfirmPasswordModel?.Model.dirty && ComfirmPasswordModel?.Model.errors?.['required']">
+                   This field cannot be empty.
+                </formErrMessageComponent>
+
+                <formErrMessageComponent v-if="ComfirmPasswordModel?.Model.dirty && !PasswordIsConfirmed">
+                   Values does not match password.
+                </formErrMessageComponent>
+            </label>
+
+            <div class="btn-wrap">
+                <button type="button" @click="Back"><b>Back</b></button>
+
+                <button :disabled="!valid || !PasswordIsConfirmed" :class="{disabled: !valid || !PasswordIsConfirmed}" type="submit"><b>Create Account</b></button>
+            </div>
         </formComponent>
     </main>
 </template>
