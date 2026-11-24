@@ -43,6 +43,7 @@ main [sign-up-bio-component] {
         color: $white;
         margin: 0 auto;
         margin-top: $largeSize;
+        cursor: pointer;
 
         &.disabled {
             @include Disabled;

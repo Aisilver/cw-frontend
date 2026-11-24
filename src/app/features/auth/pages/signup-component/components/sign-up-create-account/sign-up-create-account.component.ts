@@ -5,6 +5,7 @@ import { InjectService } from "@/app/functions/inject-service.func";
 import { _AuthRouteCallService } from "@/app/server/routes/auth-route-call/auth-route-call.service";
 import { defineComponent, ref } from "vue";
 import { _SignupService } from "../../services/sign-up.service";
+import { MainFeaturesRouter } from "@/app/features/shared/services/features-router.service";
 
 export default defineComponent({
     components: {
@@ -19,9 +20,11 @@ export default defineComponent({
 
         service = InjectService(_SignupService),
 
+        mainFeaturesRouter = new MainFeaturesRouter(),
+
         AuthApiCall = InjectService(_AuthRouteCallService)
 
-        return { AccountCreated, loader, AuthApiCall, service}
+        return { AccountCreated, loader, AuthApiCall, service, mainFeaturesRouter}
     },
 
     mounted () {
@@ -42,6 +45,10 @@ export default defineComponent({
             )
 
             this.AccountCreated = this.AuthApiCall.responseChecker(response)
+        },
+ 
+        ToLogin () {
+            this.mainFeaturesRouter.toAuth()
         }
     },
 

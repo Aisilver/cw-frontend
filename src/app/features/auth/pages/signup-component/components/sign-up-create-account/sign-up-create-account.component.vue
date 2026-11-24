@@ -12,7 +12,7 @@
 
                     <image-component :src="ImageUrl"/>
 
-                    <button v-if="AccountCreated">To Login</button>
+                    <button v-if="AccountCreated" @click="ToLogin" >To Login</button>
 
                     <button @click="CreateAccount()" class="retry" v-if="!AccountCreated">Retry</button>
                 </section>

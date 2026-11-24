@@ -2,6 +2,7 @@ import { Animator } from '@/app/classes/animator/animator.class'
 import { defineComponent, ref } from 'vue'
 import loaderComponent from '../loader-component/loader.component.vue'
 import { APP_IMAGE_PATHs_CONFIGURATIONS } from '@/app/configurations/image-paths.config.ts'
+import { Delay } from '@/app/functions/delay.func.ts'
 
 type DefaultImageTypes = 'no-user' | 'no-image'
 
@@ -70,15 +71,28 @@ export default defineComponent({
     loadImage() {
         if(!this.loader) return
 
-        const url = this.src ?? this.getDefaultImage(this.defaultImage as DefaultImageTypes)
+        const defaultImage = this.getDefaultImage(this.defaultImage as DefaultImageTypes),
+        
+        url = this.src ?? defaultImage
 
         this.loader.load(() => new Promise<void>((res) => {
+          let imgLoaded = false
 
-            if(!this.ImgElement) throw Error("image element cannot be found")
+          if(!this.ImgElement) throw Error("image element cannot be found")
 
-            this.ImgElement.onload = () => res()
+          this.ImgElement.onload = () => {
+            imgLoaded = true;
 
-            this.ImgElement.src = url
+            res()
+          }
+
+          Delay(10_000).then(() => {
+            if(!this.ImgElement || imgLoaded) return
+
+            this.ImgElement.src = defaultImage 
+          })
+
+          this.ImgElement.src = url
         }))
 
         .then(() => {

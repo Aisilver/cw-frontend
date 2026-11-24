@@ -5,6 +5,6 @@ import { Student } from "./student.entity";
 export interface Parent extends EntityBase {
     children?: Student[]
 
-    account: Account;
+    account?: Account;
     accountId: string;
 }
