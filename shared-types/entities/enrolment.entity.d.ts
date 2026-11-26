@@ -1,7 +1,7 @@
 import { EntityBase } from "./common";
 
-export interface Enrollment extends EntityBase {
-    studentId: string;
+export interface Enrollment <TID = string> extends EntityBase<TID> {
+    studentId: TID;
 
-    productId: string;
+    productId: TID;
 }

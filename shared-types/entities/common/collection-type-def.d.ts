@@ -3,7 +3,7 @@ import { Account, Admin, Enrollment, Media, Parent, Product, Student, Teacher, U
 export type CollectionTypeDefinition = {
     users: User,
     
-    account: Account;
+    accounts: Account;
 
     teachers: Teacher;
 
@@ -13,7 +13,7 @@ export type CollectionTypeDefinition = {
 
     students: Student;   
 
-    media: Media;
+    medias: Media;
 
     lessons: Product;
 

@@ -1,14 +1,14 @@
 import { Account } from "./account.entity";
 import { EntityBase } from "./common";
-import { Mylesson } from "./enrolment.entity";
+import { Enrollment } from "./enrolment.entity";
 import { Parent } from "./parent.entity";
 
-export interface Student extends EntityBase {
-    myLessons?: Mylesson []
+export interface Student <TID = string> extends EntityBase<TID> {
+    myLessons?: Enrollment[]
 
     account?: Account;
-    accountId?: string;
+    accountId?: TID;
 
     parent?: Parent;
-    parentId?: string;
+    parentId?: TID;
 }

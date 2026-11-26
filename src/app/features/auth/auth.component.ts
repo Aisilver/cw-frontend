@@ -3,10 +3,12 @@ import { _GCModalService } from "../shared/modals/g-centered-modal.service";
 import NavComponent from "@/app/features/shared/components/nav-component/nav.component.vue"
 import { InjectService } from "@/app/functions/inject-service.func";
 import imageComponent from "../shared/components/image-component/image.component.vue";
+import logoComponent from "../shared/components/logo-component/logo.component.vue";
 
 export default defineComponent({
     components: {
         NavComponent,
+        logoComponent,
         imageComponent
     },
 

@@ -3,25 +3,41 @@ import imageComponent from "@/app/features/shared/components/image-component/ima
 import formComponent from "@/app/features/shared/components/form-component/form.component.vue";
 import inputComponent from "@/app/features/shared/components/input-component/input.component.vue";
 import formErrMessageComponent from "@/app/features/shared/components/form-err-message/form-err-message.component.vue";
-import signUpAccountProfilePicComponent from "../sign-up-account-profile-pic/sign-up-account-profile-pic.component.vue";
 import { InjectService } from "@/app/functions/inject-service.func.ts";
 import { _SignupService } from "../../services/sign-up.service.ts";
 import type { Account } from "@shared/entities/account.entity.js";
 import { APP_ENTITY_DUMMY_DATA } from "@/app/configurations/dummy-entity-data.config.ts";
 import { Usernamevalidator } from "@/app/features/shared/validators/Username.validator.ts";
 import { PasswordValidator } from "@/app/features/shared/validators/Password.validator.ts";
+import imageUploaderComponent from "@/app/features/shared/components/image-uploader-component/image-uploader.component.vue";
+import type { ImageUploaderData } from "@/app/interfaces/image-uploader-data.int.ts";
+import loaderComponent from "@/app/features/shared/components/loader-component/loader.component.vue";
+import iconComponent from "@/app/features/shared/components/icon-component/icon.component.vue";
+import type { Subscription } from "@/app/classes/subject-event/types.ts";
 
 export default defineComponent({
     components: {
         imageComponent,
+        iconComponent,
         formComponent,
         inputComponent,
+        loaderComponent,
         formErrMessageComponent,
-        signUpAccountProfilePicComponent
+        imageUploaderComponent
     },
 
     setup() {
-        const service = InjectService(_SignupService),
+        const SavedProfileImageUrlStorageKey = "sign-up-profile-img-key",
+
+        ProfileImageUrl = ref<string | null>(null),
+
+        ProfileImageRef = ref<string>(),
+
+        ImageUploaderComp = ref<InstanceType<typeof imageUploaderComponent> | null>(null),
+
+        subscription = ref<Subscription>(),
+        
+        service = InjectService(_SignupService),
         
         UsernameModel = ref< InstanceType<typeof inputComponent> | null>(null),
 
@@ -29,20 +45,25 @@ export default defineComponent({
 
         ComfirmPasswordModel =  ref< InstanceType<typeof inputComponent> | null>(null),
 
-        ProfileImageRef = ref<string>(),
+        Loader = ref<InstanceType<typeof loaderComponent> | null>(null),
 
         NewAccount = ref<Account>(APP_ENTITY_DUMMY_DATA.ACCOUNT),
 
         ConfirmPasswordValue = ref<string>("")
 
         return { 
+            SavedProfileImageUrlStorageKey,
             UsernameModel, 
             PasswordWodel, 
+            Loader,
+            ImageUploaderComp,
+            ProfileImageUrl,
             ProfileImageRef, 
             service, 
             NewAccount, 
             ComfirmPasswordModel, 
-            ConfirmPasswordValue
+            ConfirmPasswordValue,
+            subscription
         }
     },
 
@@ -51,7 +72,19 @@ export default defineComponent({
 
         this.PasswordWodel?.addValidator(PasswordValidator)
 
-        this.NewAccount = APP_ENTITY_DUMMY_DATA.ACCOUNT
+        this.ProfileImageUrl = sessionStorage.getItem(this.SavedProfileImageUrlStorageKey)
+
+        this.subscription = this.ImageUploaderComp?.events.subscribe(data => {
+            const {stage, payload} = data
+
+            if(stage == "started") this.Loader?.openLoader({"spinner-loader": {spinnerSize: 20}})
+            
+            else if(stage == "completed") {
+                if(payload) this.OnProfileImageUploaded(payload)
+
+                this.Loader?.closeLoader()
+            }
+        })
     },
 
     computed: {
@@ -61,8 +94,14 @@ export default defineComponent({
     },
 
     methods: {
-        OnProfileImageSet (fileRef: string) {
-            this.ProfileImageRef = fileRef
+        OnProfileImageUploaded (data: ImageUploaderData) {
+            const {imgRef, clientUrl} = data
+
+            sessionStorage.setItem(this.SavedProfileImageUrlStorageKey, clientUrl)
+
+            this.ProfileImageUrl = clientUrl
+
+            this.ProfileImageRef = imgRef
         },
 
         Back () {
@@ -74,5 +113,9 @@ export default defineComponent({
 
             this.service.toCreateAccount()
         }
+    },
+
+    beforeUnmount() {
+        this.subscription?.unsubscribe()
     }
 })

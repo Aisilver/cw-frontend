@@ -1,4 +1,4 @@
-export type EntityBase = {
-    _id?: string;
+export type EntityBase <TID = string> = {
+    _id?: TID;
     createdAt?: Date;
 }

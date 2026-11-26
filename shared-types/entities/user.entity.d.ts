@@ -10,5 +10,4 @@ export interface User extends EntityBase {
     middleName?: string;
     gender: UserGenderStatusTypes;
     maritalStatus: UserMaritalStatusTypes;
-    accountId?: string
 }

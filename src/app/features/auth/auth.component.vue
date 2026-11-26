@@ -7,10 +7,14 @@
 
     <section class="wrapper">
         <section class="route-wrapper">
+          <logoComponent/>
+
           <RouterView/>
         </section>
 
-        <imageComponent/>
+        <section class="image-wrapper">
+          <!-- <imageComponent/> -->
+        </section>
     </section>
   </main>
 </template>

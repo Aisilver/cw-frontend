@@ -5,6 +5,6 @@
     <main logo-component>
         <imageComponent :src="logoUrl"/>
 
-        <h3>{{ title }}</h3>
+        <b>{{ title }}</b>
     </main>
 </template>

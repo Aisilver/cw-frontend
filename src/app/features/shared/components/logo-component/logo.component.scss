@@ -11,12 +11,13 @@ main[logo-component] {
     cursor: pointer;
 
     main[image-component] {
-        width: 40px;
+        width: 30px;
         border-radius: $mediumSize;
     }
 
-    h3 {
+    b {
         text-transform: capitalize;
+        font-size: $preferred_font_size;
     }
 
     @container logo (max-width: 100px) {

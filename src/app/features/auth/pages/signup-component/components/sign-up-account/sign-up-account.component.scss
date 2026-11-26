@@ -14,6 +14,41 @@ main [sign-up-account-component] {
         @include AuthHeader;
     }
 
+    .profile-img-handler {
+        @include BoxContainer(150px);
+        position: relative;
+        display: flex;
+        border-radius: 50%;
+        border: solid 2px $primary;
+        padding: 1px;
+
+        [image-component] {
+            flex: 1;
+            border-radius: inherit
+        }
+        
+        [loader-component] {
+            @include BoxContainer(40px);
+            position: absolute;
+            bottom: $mediumSize;
+            right: 0;
+            box-shadow: 5px 5px 5px custom_transparentize($black, -.8);
+            z-index: 10;
+
+            button {
+                flex: 1;
+                display: grid;
+                place-items: center;
+                background-color: lighten($color: $pallet_purple, $amount: 20);
+                border: solid 2px $white;
+                color: $pallet_purple;
+                font-size: $mediumSize + $smallSize;
+                border-radius: inherit;
+                cursor: pointer;
+            }
+        }
+    }
+
     [form-component] {
         width: clamp(250px, 100%, 600px);
 

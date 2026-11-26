@@ -1,29 +1,30 @@
 import { Admin } from "./admin.entity";
+import { EntityBase } from "./common";
 import { Media } from "./media.entity";
 import { Parent } from "./parent.entity";
 import { Student } from "./student.entity";
 import { Teacher } from "./teacher.entity";
 import { User } from "./user.entity";
 
-export interface Account {
+export interface Account<TID = string> extends EntityBase<TID> {
     userName: string;
     password: string;
 
     user?: User;
-    userId?: string;
+    userId?: TID;
     
     admin?: Admin;
-    adminId?: string;
+    adminId?: TID;
 
     teacher?: Teacher;
-    teacherId?: string;
+    teacherId?: TID;
     
     student?: Student;
-    studentId?: string;
+    studentId?: TID;
     
     parent?: Parent
-    parentId?: string;
+    parentId?: TID;
     
     profileImg?: Media;
-    profileImgId?: string;
+    profileImgId?: TID;
 }

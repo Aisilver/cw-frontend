@@ -51,7 +51,6 @@ export default defineComponent({
     },
 
     methods: {
-
         getloader (type: keyof LoaderTypeOptions) {
             switch(type) {
                 case "fade-loader": return FadeLoaderComponent
@@ -59,6 +58,20 @@ export default defineComponent({
                 case "spinner-loader": return  SpinnerLoaderComponent
 
                 default: throw Error(`unknown loader type: "${type}"`)
+            }
+        },
+
+        openLoader (opts: LoaderParameter) {
+            if(typeof opts == "string")
+                this.showLoader(opts)
+            else {
+                const loaderOption = Object.entries(opts)[0]
+
+                if(!loaderOption) throw Error("cannot pass an empty loader options object")
+
+                const [loaderType, loaderTypeArg] = loaderOption
+
+                this.showLoader(loaderType as any, loaderTypeArg)
             }
         },
 
@@ -93,17 +106,7 @@ export default defineComponent({
         async load<Data = unknown>(target: () => Promise<Data>, opts: LoaderParameter = "fade-loader") {
             let targetValue: Data
 
-            if(typeof opts == "string")
-                this.showLoader(opts)
-            else {
-                const loaderOption = Object.entries(opts)[0]
-
-                if(!loaderOption) throw Error("cannot pass an empty loader options object")
-
-                const [loaderType, loaderTypeArg] = loaderOption
-
-                this.showLoader(loaderType as any, loaderTypeArg)
-            }
+            this.openLoader(opts)
 
             targetValue = await target()
 

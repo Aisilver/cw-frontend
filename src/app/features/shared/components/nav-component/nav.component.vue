@@ -1,4 +1,4 @@
-<style lang="sass" src="./nav.component.scss" scoped></style>
+<style lang="sass" src="./nav.component.scss"></style>
 <script src="./nav.component.ts" lang="ts"></script>
 
 <template>

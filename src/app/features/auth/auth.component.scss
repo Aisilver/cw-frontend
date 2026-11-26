@@ -8,6 +8,7 @@ main[auth-component] {
     display: flex;
     flex-flow: column;
     align-items: center;
+    padding-bottom: $mediumSize;
 
     .wrapper {
         display: flex;
@@ -17,18 +18,16 @@ main[auth-component] {
         margin: auto;
         max-height: 1000px;
 
-        .route-wrapper, main[image-component] {
+        section {
             flex: 1;
-        }
-
-        main[image-component] {
-            min-width: 500px;
-        }
-
-        .route-wrapper {
             display: flex;
         }
-        
+
+        .image-wrapper {
+            [image-component] {
+                width: clamp(400px, 80%, 700px);
+            }
+        }
         @media (max-width: 1200px) {
             main[image-component] {
                 display: none;
@@ -39,6 +38,13 @@ main[auth-component] {
             margin-top: 0px;
             margin-bottom: $mediumSize;
         }
+    }
 
+    @media (max-width: 1400px) {
+        padding: $mediumSize 0px;
+
+        [nav-component] {
+            display: none;
+        }
     }
 }

@@ -3,9 +3,21 @@
 
 <template>
     <main sign-up-account-component>
+        <imageUploaderComponent ref="ImageUploaderComp"/>
+        
         <h1>Account Setup</h1>
 
-        <signUpAccountProfilePicComponent @profile_image_ref="OnProfileImageSet($event)"/>
+        <section class="profile-img-handler">
+            <imageComponent :src="ProfileImageUrl" defaultImage="no-user"/>
+
+            <loaderComponent ref="Loader">
+                <template #content>
+                    <button @click="ImageUploaderComp?.Upload()">
+                        <iconComponent name="pen"/>
+                    </button>
+                </template>
+            </loaderComponent>
+        </section>
 
         <formComponent v-slot="{ formKey, valid }" @submit="Submit()">
             <label>
