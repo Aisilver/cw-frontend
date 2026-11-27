@@ -1,4 +1,7 @@
+@use "/src/partial-styles/mixings" as *;
+
 main[loader-component] {
+    @include NoLine;
     flex: 1;
     display: flex;
     position: relative;

@@ -11,4 +11,8 @@ export class MainFeaturesRouter extends RouteHandler{
         else
             this.router.push(`/auth/${where}`)
     }
+
+    toApp (username: string) {
+        this.router.push(`/@${username}`)
+    }
 }

@@ -109,7 +109,9 @@ class ServerCallService {
         serializedData = JSON.parse(await serverResponseDecryptor.decrypt(await response.json()))
       else serializedData = await response.json()
     } catch (error: any) {
+
       serializedData = {
+        data: null,
         state: 'failed',
         message: error.message,
       }

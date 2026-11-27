@@ -5,7 +5,7 @@
 <template>
     <main form-component>
         <form @submit.prevent="$emit('submit')" ref="FormElement">
-            <slot :formKey="formKey" :valid="valid" />
+            <slot :formKey="formKey" :valid="valid"/>
         </form>
     </main>
 </template>

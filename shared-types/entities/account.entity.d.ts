@@ -6,7 +6,10 @@ import { Student } from "./student.entity";
 import { Teacher } from "./teacher.entity";
 import { User } from "./user.entity";
 
+export type AccountTypes = "dependant" | "primary"
+
 export interface Account<TID = string> extends EntityBase<TID> {
+    type: AccountTypes;
     userName: string;
     password: string;
 

@@ -9,13 +9,14 @@
 
         <b v-if="ErrorMessage">{{ ErrorMessage }}</b>
 
-        <form-component v-slot="{ formKey, valid }" :submit="Login()">
+        <form-component v-slot="{ formKey, valid }" @submit="Login()">
 
             <label>
                 <input-component ref="UsernameModel" :formContextKey="formKey">
                     <input  
                         type="text" 
                         name="username"
+                        v-model="SignInCred.username"
                         required
                         placeholder="Username">
                 </input-component>
@@ -30,6 +31,7 @@
                     <input 
                         type="password" 
                         name="password"
+                        v-model="SignInCred.password"
                         required
                         placeholder="Password">
                 </input-component>

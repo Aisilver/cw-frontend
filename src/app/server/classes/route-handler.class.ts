@@ -28,12 +28,12 @@ export abstract class RouteHandler {
   responseChecker<ResponseData = unknown>(
     response: ApiResponse<ResponseData>,
     onSuccess?: (data: ResponseData) => void,
-    onFail?: () => void,
+    onFail?: (errMessage?: string) => void,
   ) {
-    const { state, data } = response
+    const { state, data, message } = response
 
     if (onSuccess && state == 'succeeded') onSuccess(data as any)
-    else if (onFail && state == 'failed') onFail()
+    else if (onFail && state == 'failed') onFail(message)
 
     return state == 'succeeded'
   }

@@ -51,12 +51,6 @@ export default defineComponent({
         })
     },
   
-    methods: {
-        setModelForCheck(name: string, model: InputModel) {            
-            this.inputModelMap.set(name, model)
-        }
-    },
-
     beforeUnmount() {
         this.onInputsModelChangeSubs?.unsubscribe()
     }
