@@ -112,5 +112,7 @@
         
             <input :class="{disabled: !valid}" :disabled="!valid" type="submit" value="Next">
         </formComponent>
+
+        <p>Already have an account? <span @click="ToLogin">Login</span>.</p>
     </main>
 </template>

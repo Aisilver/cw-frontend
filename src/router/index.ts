@@ -13,7 +13,7 @@ const router = createRouter({
       component: () => import('../app/features/auth/auth.component.vue'),
       children: [
         {
-          path: "/",
+          path: "/auth",
           component: () => import("../app/features/auth/pages/login-component/login.component.vue")
         },
         {

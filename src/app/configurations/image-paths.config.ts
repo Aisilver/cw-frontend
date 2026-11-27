@@ -19,5 +19,9 @@ export const APP_IMAGE_PATHs_CONFIGURATIONS = {
 
     WELCOME: AssetsPathBuilder({folder: "images", name: "undraw_welcome-cats_tw36", ext: "svg"}),
 
-    SERVER_FAILED: AssetsPathBuilder({folder: "images", name: "undraw_server-failure_syqp", ext: "svg"})
+    SERVER_FAILED: AssetsPathBuilder({folder: "images", name: "undraw_server-failure_syqp", ext: "svg"}),
+
+    HAPPY_ANNOUNCEMEENT: AssetsPathBuilder({folder: "images", name: "undraw_happy-announcement_23nf", ext: "svg"}),
+
+    SCHOOL_IMAGE: AssetsPathBuilder({folder: "images", name: "school-image", ext: "jpg"})
 }

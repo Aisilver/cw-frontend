@@ -50,12 +50,8 @@ main [sign-up-bio-component] {
         }
     }
 
-    @media (max-width: 500px) {
-        padding: $largeSize $mediumSize;
-
-        h1 {
-            font-size: $mediumSize * 2;
-        }
+    & > p {
+        @include AuthPageSwitchTextStyle
     }
 
     @media (min-width: 800px) {

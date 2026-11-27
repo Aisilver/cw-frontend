@@ -8,12 +8,11 @@
     <section class="wrapper">
         <section class="route-wrapper">
           <logoComponent/>
-
           <RouterView/>
         </section>
 
         <section class="image-wrapper">
-          <!-- <imageComponent/> -->
+          <imageComponent :src="BannerImgUrl"/>
         </section>
     </section>
   </main>

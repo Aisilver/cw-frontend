@@ -9,6 +9,7 @@ import signUpRoleImageCarouselComponent from './components/role-image-carousel/s
 import FormErrMessageComponent from '@/app/features/shared/components/form-err-message/form-err-message.component.vue'
 import radioComponent from '@/app/features/shared/components/radio-component/radio.component.vue'
 import { APP_ENTITY_DUMMY_DATA } from '@/app/configurations/dummy-entity-data.config.ts'
+import { MainFeaturesRouter } from '@/app/features/shared/services/features-router.service.ts'
 
 export default defineComponent({
   components: {
@@ -29,6 +30,8 @@ export default defineComponent({
 
     LastNameModel = ref<InstanceType<typeof inputComponent>>(),
 
+    mainFeaturesRouter = new MainFeaturesRouter(),
+
     Role = ref<Roles>(service.Role.getValue()),
 
     NewUser = ref(service.NewUser ?? APP_ENTITY_DUMMY_DATA.USER)
@@ -39,7 +42,8 @@ export default defineComponent({
       NewUser, 
       FormComponent,
       FirstNameModel,
-      LastNameModel
+      LastNameModel,
+      mainFeaturesRouter
     }
   },
 
@@ -52,6 +56,10 @@ export default defineComponent({
       this.service.setUser(this.NewUser)
 
       this.service.toAccountSetup()
+    },
+
+    ToLogin () {
+      this.mainFeaturesRouter.toAuth("login")
     }
   }
 })

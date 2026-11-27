@@ -16,20 +16,37 @@ main[auth-component] {
         @include WhiteContainer($white, true, 0px);
         height: 100%;
         margin: auto;
+        overflow: hidden;
         max-height: 1000px;
 
         section {
             flex: 1;
             display: flex;
+            flex-flow: column;
         }
 
-        .image-wrapper {
-            [image-component] {
-                width: clamp(400px, 80%, 700px);
+        .route-wrapper {
+            [logo-component] {
+                padding-top: $mediumSize;
             }
         }
+
+        .image-wrapper {            
+            [image-component] {
+                flex: 1;
+            }
+        }
+
+        @media (min-width: 1500px) {
+            .route-wrapper {
+                [logo-component] {
+                    display: none;
+                }
+            }
+        }
+
         @media (max-width: 1200px) {
-            main[image-component] {
+            .image-wrapper {
                 display: none;
             }
         }
@@ -40,7 +57,7 @@ main[auth-component] {
         }
     }
 
-    @media (max-width: 1400px) {
+    @media (max-width: 1500px) {
         padding: $mediumSize 0px;
 
         [nav-component] {

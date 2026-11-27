@@ -54,9 +54,9 @@ export default defineComponent({
 
     computed: {
         ImageUrl () {
-            const {SERVER_FAILED, WELCOME} = APP_IMAGE_PATHs_CONFIGURATIONS
+            const {SERVER_FAILED, HAPPY_ANNOUNCEMEENT} = APP_IMAGE_PATHs_CONFIGURATIONS
 
-            return this.AccountCreated ? WELCOME : SERVER_FAILED
+            return this.AccountCreated ? HAPPY_ANNOUNCEMEENT : SERVER_FAILED
         },
 
         HeaderText () {

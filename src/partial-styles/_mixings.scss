@@ -65,3 +65,12 @@
         width: clamp($min_width, 40%, 500px);
     }
 }
+
+@mixin ButtonTemplate ($bg: $primary, $color: $white) {
+    @include NoLine;
+    padding: $mediumSize $largeSize;
+    border-radius: $smallSize;
+    background-color: $bg;
+    color: $color;
+    cursor: pointer;
+}

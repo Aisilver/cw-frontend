@@ -1,6 +1,6 @@
 type Options = {
     name: string;
-    ext: "svg" | "webp" | "png";
+    ext: "svg" | "webp" | "png" | "jpg" | "jpeg";
     folder?: "images"
 }
 

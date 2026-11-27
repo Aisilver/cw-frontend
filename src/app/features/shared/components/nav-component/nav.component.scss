@@ -5,6 +5,7 @@
 main [nav-component] {
     position: static;
     width: 100vw;
+    margin-top: $largeSize;
     display: flex;
     justify-content: center;
     z-index: 5;

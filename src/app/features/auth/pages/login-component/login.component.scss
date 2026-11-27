@@ -1,3 +1,55 @@
+@use "/src/partial-styles/variables" as *; 
+@use "/src/partial-styles/mixings" as *;
+@use "/src/partial-styles/animations" as *;
+@use "../../../auth/partial-styles//mixings" as *;
+
 main [login-component] {
-    
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+
+    h1{
+        @include AuthHeader;
+    }
+
+    [image-component] {
+        width: 200px;
+        margin: $largeSize;
+    } 
+
+    b {
+        background-color: $err;
+        color: $white;
+        padding: $mediumSize $largeSize;
+        border-radius: $largeSize;
+        font-size: $preferred_font_size;
+
+        @include FadeIn;
+    }
+
+    [form-component] {
+        display: flex;
+        flex-flow: column;
+        gap: $largeSize;
+        width: clamp(200px, 80%, 600px);
+
+        [loader-component] {
+            width: clamp(200px, 80%, 500px);
+            margin: 0 auto;
+
+            [type = "submit"] {
+                @include ButtonTemplate;
+
+                &.disabled {
+                    @include Disabled;
+                }
+            }   
+        }
+    }
+
+    & > p {
+        @include AuthPageSwitchTextStyle;
+    }
 }

@@ -5,8 +5,17 @@
     text-align: center;
     font-size: $mediumSize * 2;
 
-
     &::first-letter {
         text-transform: capitalize;
+    }
+}
+
+@mixin AuthPageSwitchTextStyle {
+    font-size: $preferred_font_size;
+    
+    span {
+        color: $primary;
+        text-decoration: underline;
+        cursor: pointer;
     }
 }

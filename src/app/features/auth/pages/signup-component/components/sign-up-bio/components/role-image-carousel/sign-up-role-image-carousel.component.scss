@@ -2,8 +2,8 @@
 @use "/src/partial-styles/mixings" as *;
 
 main [role-select-carousel] {
-    @include BoxContainer(100px);
-    min-height: 100px;
+    @include BoxContainer(200px);
+    min-height: 200px;
     position: relative;
     margin: $mediumSize auto;
     border-radius: $mediumSize;
@@ -25,10 +25,5 @@ main [role-select-carousel] {
         & [image-component] {
             flex: 1;
         }
-    }
-
-    @media (min-height: 920px) {
-        @include BoxContainer(200px);
-        margin: ($largeSize * 2) 0px;
     }
 }

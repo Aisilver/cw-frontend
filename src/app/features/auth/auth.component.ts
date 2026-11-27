@@ -1,9 +1,8 @@
-import { defineComponent, ref } from "vue";
-import { _GCModalService } from "../shared/modals/g-centered-modal.service";
+import { defineComponent } from "vue";
 import NavComponent from "@/app/features/shared/components/nav-component/nav.component.vue"
-import { InjectService } from "@/app/functions/inject-service.func";
 import imageComponent from "../shared/components/image-component/image.component.vue";
 import logoComponent from "../shared/components/logo-component/logo.component.vue";
+import { APP_IMAGE_PATHs_CONFIGURATIONS } from "@/app/configurations/image-paths.config.ts";
 
 export default defineComponent({
     components: {
@@ -13,18 +12,8 @@ export default defineComponent({
     },
 
     setup() {
-        const Message = ref("Welcome To Auth")
+        const BannerImgUrl = APP_IMAGE_PATHs_CONFIGURATIONS.SCHOOL_IMAGE
 
-        return {
-            Message
-        }
-    },
-
-    methods: {
-        openDialogue() {
-            const GCModal = InjectService(_GCModalService)
-
-            GCModal.openDialogue()
-        }
+        return { BannerImgUrl }
     }
 })

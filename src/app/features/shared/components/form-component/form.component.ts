@@ -6,6 +6,7 @@ import type { Subscription } from "@/app/classes/subject-event/types";
 
 export default defineComponent({
     emits: ["submit"],
+    
     setup() {
         const inputModelMap = new Map<string, InputModel>(),
 

@@ -15,9 +15,31 @@
       box-sizing: border-box;
     }
 
+    *::-webkit-scrollbar {
+      width: 8px;
+      display: block;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: #5139d5;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
     input[type="password"]::-webkit-reveal, input[type="password"]::-ms-reveal {
       display: none;
     }
+      
+    @media (max-width: 500px) {
+      *::-webkit-scrollbar {
+        width: 5px;
+      }
+    }
+
   </style>
   <body>
     <div id="app"></div>

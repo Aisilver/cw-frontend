@@ -76,21 +76,17 @@ export default defineComponent({
         url = this.src ?? defaultImage
 
         this.loader.load(() => new Promise<void>((res) => {
-          let imgLoaded = false
-
           if(!this.ImgElement) throw Error("image element cannot be found")
 
-          this.ImgElement.onload = () => {
-            imgLoaded = true;
+          this.ImgElement.onload = () => res()
 
-            res()
+          this.ImgElement.onerror = () => {
+
+            if(this.ImgElement) 
+              this.ImgElement.src = defaultImage 
+
+              res()
           }
-
-          Delay(10_000).then(() => {
-            if(!this.ImgElement || imgLoaded) return
-
-            this.ImgElement.src = defaultImage 
-          })
 
           this.ImgElement.src = url
         }))
